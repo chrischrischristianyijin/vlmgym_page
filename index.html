@@ -413,28 +413,32 @@
 </section>
 <!-- End Radar Chart Comparison Section -->
 
-<!-- Leaderboard -->
-<section class="leaderboard-section">
-  <div class="leaderboard-wrapper">
-    <div class="leaderboard-header">
-      <h2 class="leaderboard-title">Leaderboard</h2>
-      <div class="leaderboard-description">
-        <p class="leaderboard-intro">
-          Even the best-performing frontier model, GPT-5, achieves only <strong class="leaderboard-stat">26.43%</strong> on VisGym (Easy) and <strong class="leaderboard-stat">12.57%</strong> on VisGym (Hard), indicating that VisGym poses a significant challenge for existing models.
-        </p>
-      </div>
-    </div>
-    <div class="leaderboard-visual">
-      <div class="leaderboard-image-container">
-        <img src="static/images/success_rate_per_model.png" alt="Success Rate per Model Leaderboard" class="leaderboard-image">
-        <p class="leaderboard-subtitle">
-          Success rates across different models on VisGym environments.
-        </p>
+<!-- Frontier VLMs Fail Section -->
+<section class="frontier-fail-section" style="padding: 4rem 0; background-color: #ffffff;">
+  <div class="container is-max-desktop" style="max-width: 100%; padding-left: 20px; padding-right: 20px;">
+    <div class="frontier-fail-content">
+      <h2 class="frontier-fail-title">Frontier VLMs Fail on VisGym</h2>
+      <p class="frontier-fail-description">
+        Even the best-performing frontier model, GPT-5, achieves only <strong class="stat-easy">26.43%</strong> on VisGym (Easy) and <strong class="stat-hard">12.57%</strong> on VisGym (Hard), indicating that VisGym poses a significant challenge for existing models.
+      </p>
+      
+      <div class="frontier-fail-images-grid">
+        <div class="frontier-fail-image-item">
+          <div class="frontier-fail-image-container">
+            <img src="static/images/avg_performance.png" alt="Average Performance" style="width: 100%; height: auto; display: block; background: transparent; border: none; box-shadow: none;" loading="lazy">
+          </div>
+        </div>
+        
+        <div class="frontier-fail-image-item">
+          <div class="frontier-fail-image-container">
+            <img src="static/images/num_steps_density_curves_reward.png" alt="Number of Steps Density Curves and Reward" style="width: 100%; height: auto; display: block; background: transparent; border: none; box-shadow: none;" loading="lazy">
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End Leaderboard -->
+<!-- End Frontier VLMs Fail Section -->
 
 <!-- Task Success Rate Table -->
 <section class="task-success-rate-section" style="padding: 3rem 0; background-color: #fafafa; width: 100%;">
@@ -448,23 +452,29 @@
 </section>
 <!-- End Task Success Rate Table -->
 
-<!-- Number of Steps Density Curves -->
-<section class="hero is-small">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <h2 class="title is-3 has-text-centered">Number of Steps Density Curves</h2>
-      <div class="content has-text-justified" style="margin-bottom: 2rem;">
-        <p class="has-text-centered">
-          Distribution of number of steps and reward curves across different environments.
-        </p>
-      </div>
-      <div class="density-curves-container" style="width: 100%; display: flex; justify-content: center; align-items: center;">
-        <img src="static/images/num_steps_density_curves_reward.png" alt="Number of Steps Density Curves and Reward" style="width: 100%; height: auto; display: block; max-width: 100%;">
+<!-- Performance Analysis Section -->
+<section class="performance-analysis-section" style="padding: 4rem 0; background-color: #fafafa;">
+  <div class="container is-max-desktop" style="max-width: 100%; padding-left: 20px; padding-right: 20px;">
+    <div class="performance-analysis-content">
+      <h2 class="performance-analysis-title">Performance Analysis</h2>
+      
+      <div class="performance-images-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+        <div class="performance-image-item">
+          <div class="performance-image-container">
+            <img src="static/images/num_steps_density_curves_reward.png" alt="Number of Steps Density Curves and Reward" style="width: 100%; height: auto; display: block; background: transparent; border: none; box-shadow: none;">
+          </div>
+        </div>
+        
+        <div class="performance-image-item">
+          <div class="performance-image-container">
+            <iframe src="static/pdfs/avg_performance.pdf" style="width: 100%; height: 600px; border: none; display: block; background: transparent;"></iframe>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End Number of Steps Density Curves -->
+<!-- End Performance Analysis Section -->
 
 
 

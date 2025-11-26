@@ -29,11 +29,12 @@ html {
 }
 
 body {
-  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  background-color: #f5f5f7; /* Titanium gray - cold silver-white */
+  color: #1d1d1f;
+  margin: 0;
+  padding: 0;
   line-height: 1.6;
-  font-size: 16px;
-  background-color: var(--background-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -49,22 +50,90 @@ body {
   overflow: hidden;
 }
 
-.button.is-dark {
+/* Only apply .is-dark styles if NOT .apple-button */
+.button.is-dark:not(.apple-button) {
   background: var(--text-primary) !important;
   border: none !important;
   color: white !important;
   box-shadow: var(--shadow-md);
 }
 
-.button.is-dark:hover {
+.button.is-dark:not(.apple-button):hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
   background: var(--primary-color) !important;
 }
 
-.button.is-dark:active {
+.button.is-dark:not(.apple-button):active {
   transform: translateY(0);
   box-shadow: var(--shadow-md);
+}
+
+/* Apple-style Buttons - Glassmorphism with Dark Blue Semi-transparent */
+.button.is-dark.apple-button,
+.apple-button {
+  /* Glassmorphism effect - Dark blue semi-transparent */
+  background: rgba(0, 26, 51, 0.6) !important; /* Dark blue (#001a33) semi-transparent */
+  backdrop-filter: blur(20px) saturate(180%) !important; /* Glass blur effect */
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important; /* Safari support */
+  color: #ffffff !important; /* White text for contrast */
+  border-radius: 980px !important; /* Apple's pill shape */
+  padding: 12px 24px !important;
+  font-weight: 500 !important;
+  font-size: 0.95rem !important;
+  border: 1px solid rgba(0, 26, 51, 0.5) !important; /* Dark blue border */
+  box-shadow: 
+    0 4px 16px rgba(0, 26, 51, 0.3),
+    0 1px 3px rgba(0, 26, 51, 0.2) !important; /* Dark blue shadows */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  /* Override any conflicting styles */
+  overflow: visible !important;
+}
+
+.button.is-dark.apple-button:hover,
+.apple-button:hover {
+  background: rgba(0, 26, 51, 0.7) !important; /* Darker blue on hover */
+  backdrop-filter: blur(25px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(200%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 
+    0 8px 24px rgba(0, 26, 51, 0.4),
+    0 2px 6px rgba(0, 26, 51, 0.3) !important; /* Darker blue shadows */
+  border-color: rgba(0, 26, 51, 0.6) !important; /* Darker border on hover */
+}
+
+.button.is-dark.apple-button:active,
+.apple-button:active {
+  transform: translateY(0) !important;
+  box-shadow: 
+    0 2px 8px rgba(0, 26, 51, 0.3) !important; /* Dark blue shadow */
+  background-color: rgba(0, 26, 51, 0.65) !important; /* Slightly lighter when pressed */
+}
+
+.apple-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Reduced: 12px→10px */
+  margin-top: 0; /* Controlled by abstract margin */
+  text-align: left;
+}
+
+/* Abstract - Back to Left Panel */
+.apple-abstract {
+  margin: 28px 0 24px; /* Reduced: 50px→28px top, 40px→24px bottom */
+  text-align: left;
+  padding-top: 0;
+  border-top: none;
+}
+
+.apple-abstract p {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(1rem, 1.2vw + 0.5rem, 1.25rem) !important; /* Responsive font size */
+  line-height: 1.75; /* More breathing room between lines */
+  color: #6e6e73; /* Medium gray */
+  font-weight: 400; /* Regular weight */
+  margin: 0;
+  letter-spacing: -0.01em;
 }
 
 .footer .icon-link {
@@ -87,7 +156,133 @@ body {
 }
 
 
-/* Hero Section Modernization */
+/* Apple-style Hero Section */
+.apple-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f7;
+  /* Prevent flex from stretching content vertically */
+  align-content: flex-start;
+  justify-content: flex-start;
+}
+
+/* Full-width Title Container */
+.apple-title-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 60px 80px 40px; /* Reduced: 120px→60px top, 60px→40px bottom */
+  text-align: left;
+  /* Prevent flex layout from stretching the container */
+  flex-shrink: 0;
+  align-self: flex-start; /* Align to top, don't stretch */
+}
+
+/* Conference Badge */
+.conference-badge {
+  display: inline-block;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #86868b;
+  margin-bottom: 12px; /* Reduced: 16px→12px */
+  padding: 6px 12px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 6px;
+}
+
+.hero-split-container {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  flex: 1;
+  align-items: flex-start; /* Align to top instead of stretching */
+  align-content: flex-start; /* Compact vertical alignment */
+}
+
+/* Left Panel: Information Console */
+.hero-left-panel {
+  flex: 1 1 50%; /* At least 50% for text, can grow */
+  min-width: 0; /* Allow flex shrinking */
+  display: flex;
+  align-items: flex-start; /* Align to top to match image */
+  justify-content: flex-start;
+  padding: 50px 50px 50px 60px; /* Reduced: 80px→50px vertical, 60px→50px right */
+  background-color: #f5f5f7;
+}
+
+.hero-content-wrapper {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0; /* Allow flex shrinking */
+  text-align: left;
+  /* Strict left alignment with generous vertical spacing */
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* Controlled spacing via individual margins */
+  /* Align to top */
+  justify-content: flex-start;
+}
+
+/* Right Panel: Visual Window */
+.hero-right-panel {
+  flex: 1 1 50%; /* Equal space, can grow */
+  min-width: 0; /* Allow flex shrinking */
+  display: flex;
+  align-items: flex-start; /* Align to top to match authors */
+  justify-content: center;
+  padding: 50px 30px; /* Reduced: 80px→50px vertical, 40px→30px horizontal */
+  background-color: #f5f5f7;
+  position: relative;
+  overflow: hidden;
+  /* Visual balance - align with left panel */
+  align-self: stretch;
+}
+
+.apple-image-container {
+  width: 100%;
+  display: flex;
+  align-items: flex-start; /* Align image to top */
+  justify-content: center;
+  position: relative;
+  margin-top: 0; /* Ensure no extra top margin */
+}
+
+.apple-teaser-image {
+  width: 100%;
+  height: auto;
+  max-height: 90vh; /* Full height again */
+  object-fit: contain;
+  border-radius: 20px; /* Larger radius - iPad Pro style */
+  /* Ultra-soft diffuse shadow - floating glass screen effect */
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.06),
+    0 15px 40px rgba(0, 0, 0, 0.04),
+    0 5px 15px rgba(0, 0, 0, 0.02),
+    0 0 0 1px rgba(0, 0, 0, 0.02);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #ffffff;
+  padding: 2px;
+}
+
+.apple-teaser-image:hover {
+  transform: translateY(-6px);
+  box-shadow: 
+    0 40px 100px rgba(0, 0, 0, 0.08),
+    0 20px 50px rgba(0, 0, 0, 0.06),
+    0 8px 20px rgba(0, 0, 0, 0.03),
+    0 0 0 1px rgba(0, 0, 0, 0.03);
+}
+
+/* Hero Section Modernization (fallback) */
 .hero {
   position: relative;
   overflow: hidden;
@@ -116,10 +311,69 @@ body {
 /* Publication Content Styling */
 .publication-title {
     font-family: 'Inter', sans-serif !important;
+    font-size: 3.5rem !important;
     font-weight: 800 !important;
-    color: var(--text-primary) !important;
-    margin-bottom: 2rem !important;
+    letter-spacing: -0.03em !important;
+    margin-bottom: 30px !important;
     line-height: 1.1 !important;
+    background: linear-gradient(180deg, #111 0%, #333 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+/* Apple-style Title - Responsive with clamp() - Higher priority to override .publication-title */
+.publication-title.apple-title,
+.apple-title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif !important;
+    font-size: clamp(2rem, 3vw + 1rem, 3.2rem) !important; /* Reduced: 2rem on small, 3.2rem on large - less overwhelming */
+    font-weight: 800 !important; /* Slightly lighter than 900 */
+    letter-spacing: -0.04em !important; /* Slightly looser tracking */
+    margin: 0 !important; /* Reset all margins to prevent browser default spacing */
+    margin-top: 0 !important; /* Explicitly reset top margin */
+    margin-bottom: 0 !important; /* Explicitly reset bottom margin */
+    line-height: 1 !important; /* Very tight line height - no extra space */
+    color: #1d1d1f !important;
+    -webkit-text-fill-color: #1d1d1f !important;
+    background: none !important; /* Override gradient */
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    text-align: left !important;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    /* Prevent flex layout from stretching the title */
+    flex-shrink: 0;
+}
+
+/* Title Main - VisGym */
+.publication-title.apple-title .title-main,
+.apple-title .title-main {
+    font-size: clamp(2rem, 3.5vw + 1rem, 3.5rem) !important; /* Reduced: 2rem on small, 3.5rem on large (was 4rem) */
+    font-weight: 900 !important; /* Ultra bold */
+    color: #001a33 !important; /* Navy blue - deep dark blue (墨蓝) */
+    -webkit-text-fill-color: #001a33 !important;
+    display: block;
+    line-height: 1 !important; /* No extra line height */
+    margin: 0 !important; /* Reset all margins */
+    margin-bottom: -0.15em !important; /* More negative margin to pull subtitle closer */
+    padding: 0; /* Reset all padding */
+    padding-bottom: 0;
+}
+
+/* Title Subtitle - Detailed description */
+.publication-title.apple-title .title-subtitle,
+.apple-title .title-subtitle {
+    font-size: clamp(1.2rem, 2vw + 0.6rem, 1.8rem) !important; /* Increased: 1.2rem on small, 1.8rem on large (was 1.6rem) */
+    font-weight: 500 !important; /* Medium weight - lighter than main */
+    color: #424245 !important; /* Medium gray - softer than main */
+    -webkit-text-fill-color: #424245 !important;
+    display: block;
+    line-height: 1.1 !important; /* Tighter line height */
+    letter-spacing: -0.01em;
+    margin: 0 !important; /* Reset all margins */
+    margin-top: 0 !important;
+    padding: 0; /* Reset all padding */
+    padding-top: 0;
 }
 
 .publication-banner {
@@ -147,8 +401,131 @@ body {
 
 .publication-authors {
     font-family: 'Inter', sans-serif !important;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
+    font-size: 1.25rem !important;
+    font-weight: 400 !important;
+    margin-bottom: 10px !important;
+    color: #444 !important;
+}
+
+/* Authors Block Module - Blocked with Accent Line */
+.authors-block-module {
+    position: relative;
+    padding-left: 24px; /* Space for accent line */
+    margin-bottom: 32px; /* Reduced: 50px→32px */
+    padding-top: 4px;
+    padding-bottom: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Blue line that runs through entire module */
+.authors-block-module::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #003262 0%, #1e88e5 100%); /* Berkeley Blue gradient */
+    border-radius: 2px;
+}
+
+/* Apple-style Authors - Natural Flow */
+.apple-authors {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: clamp(1.1rem, 1.5vw + 0.5rem, 1.35rem) !important; /* Responsive font size */
+    font-weight: 600 !important; /* Bold names */
+    margin-bottom: 12px !important; /* Reduced: 20px→12px */
+    color: #1d1d1f !important; /* Darker for weight */
+    line-height: 1.7 !important; /* Reduced: 1.8→1.7 */
+    text-align: left !important;
+    /* Natural flow - let names wrap naturally */
+    display: block;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    /* Ensure container allows horizontal flow */
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Author block - merged definition */
+.author-block {
+    display: inline !important; /* Force inline - prevent vertical stacking */
+    white-space: normal; /* Allow wrapping between blocks */
+    margin-right: 0.3rem; /* Tighter spacing */
+}
+
+.apple-affiliations {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: clamp(1.1rem, 1.4vw + 0.5rem, 1.4rem) !important; /* Increased: 1.25rem→1.4rem for larger text */
+    color: #003262 !important; /* Berkeley Blue */
+    font-weight: 600 !important; /* Bold */
+    margin-bottom: 4px !important; /* Reduced: 8px→4px */
+    text-align: left !important;
+    padding-bottom: 0;
+    /* Ensure proper alignment within the blue line module */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Affiliation Group - University + Lab Logos */
+.affiliation-group {
+    display: flex;
+    align-items: center; /* Perfect vertical center alignment */
+    gap: 20px; /* Increased: 16px→20px for more spacing between UC Berkeley and logos */
+    flex-wrap: wrap;
+    margin-bottom: 0; /* No bottom margin since eql-cntrb is above now */
+    margin-top: 4px; /* Add top margin for spacing from eql-cntrb */
+    /* Ensure visual center alignment between text and logos */
+    min-height: 40px; /* Minimum height for consistent alignment */
+}
+
+.lab-logos {
+    display: flex;
+    align-items: center; /* Perfect center alignment with UC Berkeley */
+    gap: 20px; /* Increased: 14px→20px for more spacing between logos */
+    /* Match the visual center line of text */
+    height: fit-content;
+}
+
+.lab-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    /* Full color - no grayscale */
+    opacity: 1;
+}
+
+.lab-logo:hover {
+    opacity: 0.9; /* Slight fade on hover */
+    transform: translateY(-1px);
+}
+
+.lab-logo-img {
+    height: 42px; /* Increased: 36px→42px for larger logos */
+    width: auto;
+    max-width: 180px; /* Increased: 150px→180px */
+    object-fit: contain;
+    display: block;
+}
+
+.apple-affiliations .eql-cntrb {
+    color: #86868b !important;
+    font-weight: 400 !important;
+    font-size: 0.9rem !important;
+    margin-top: 0; /* At the top now */
+    margin-bottom: 0;
+    display: block;
+    /* Align with affiliation-group start */
+    margin-left: 0;
+    padding-left: 0;
 }
 
 .publication-venue {
@@ -174,35 +551,28 @@ body {
 }
 
 .publication-authors a {
-   color: var(--primary-color) !important;
+   color: #2563eb !important;
    text-decoration: none;
-   font-weight: 600;
-   transition: var(--transition);
+   transition: color 0.2s ease;
    position: relative;
 }
 
-.publication-authors a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background: var(--gradient-accent);
-    transition: var(--transition);
-}
-
-.publication-authors a:hover::after {
-    width: 100%;
-}
-
 .publication-authors a:hover {
-    color: var(--primary-hover) !important;
+    color: #1e40af !important;
 }
 
-.author-block {
-  display: inline-block;
-  margin-right: 0.5rem;
+.apple-authors a {
+   color: #1d1d1f !important; /* Dark for weight */
+   text-decoration: none;
+   transition: color 0.2s ease;
+   font-weight: 600 !important; /* Bold links */
+   display: inline !important; /* Ensure inline - prevent block stacking */
+   white-space: nowrap; /* Keep names together */
+}
+
+.apple-authors a:hover {
+    color: #003262 !important; /* Berkeley Blue on hover */
+    text-decoration: none;
 }
 
 .publication-banner img {
@@ -308,6 +678,22 @@ body {
   font-style: italic;
 }
 
+/* Affiliations and Conference Info Styling */
+.affiliations {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 5px;
+  font-weight: 300;
+}
+
+.conference-info {
+  font-family: 'Inter', monospace; /* 稍微换个字体风格区分 */
+  font-size: 1rem;
+  color: #d97706; /* 强调色，例如琥珀色或深红 */
+  font-weight: 600;
+  margin-top: 10px;
+}
+
 /* Section Titles */
 .title.is-3 {
   font-family: 'Inter', sans-serif !important;
@@ -339,6 +725,35 @@ body {
 
 .content.has-text-justified p {
   margin-bottom: 1.5rem;
+}
+
+/* Abstract Section - Full Width */
+section.hero.is-light .container.is-max-desktop {
+  max-width: 100% !important;
+  width: 100%;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+section.hero.is-light .columns.is-centered {
+  max-width: 100%;
+}
+
+section.hero.is-light .column.is-four-fifths {
+  flex: none;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Abstract Title - Left Aligned with Blue Underline */
+section.hero.is-light .title.is-3 {
+  text-align: left !important;
+}
+
+section.hero.is-light .title.is-3::after {
+  left: 0 !important; /* Align to left instead of center */
+  transform: none !important; /* Remove centering transform */
+  background: linear-gradient(90deg, #003262 0%, #1e88e5 100%) !important; /* Berkeley Blue gradient */
 }
 
 /* Footer Improvements */
@@ -599,35 +1014,186 @@ code {
 
 
 /* Mobile Responsive Improvements */
+@media screen and (max-width: 1024px) {
+  section.hero.is-light .container.is-max-desktop {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  
+  /* Switch to vertical layout on tablets and mobile */
+  .apple-title-container {
+    padding: 40px 40px 30px; /* Reduced: 80px→40px top, 40px→30px bottom */
+  }
+  
+  .hero-split-container {
+    flex-direction: column; /* Stack vertically */
+    min-height: auto;
+  }
+  
+  .hero-left-panel {
+    flex: 1 1 auto; /* Full width on mobile */
+    padding: 30px 30px; /* Reduced: 40px→30px */
+    order: 1;
+  }
+  
+  .hero-right-panel {
+    flex: 1 1 auto; /* Full width on mobile */
+    padding: 20px 20px 50px; /* Reduced: 80px→50px bottom */
+    order: 2;
+  }
+  
+  /* Title uses clamp() so no need to override */
+  .apple-teaser-image {
+    max-height: 70vh;
+  }
+  
+  .authors-block-module {
+    margin-bottom: 24px; /* Reduced for mobile */
+  }
+  
+  .affiliation-group {
+    gap: 10px; /* Reduced gap on tablet */
+  }
+  
+  .lab-logos {
+    gap: 16px; /* Increased: 10px→16px for tablet */
+  }
+  
+  .lab-logo-img {
+    height: 38px; /* Increased: 32px→38px */
+    max-width: 160px; /* Increased: 130px→160px */
+  }
+  
+  .apple-affiliations {
+    font-size: clamp(1.05rem, 1.3vw + 0.5rem, 1.3rem) !important; /* Larger on tablet */
+  }
+  
+  .apple-affiliations .eql-cntrb {
+    margin-left: 0; /* No margin needed since it's at the top */
+  }
+  
+  .apple-abstract {
+    margin: 24px 0 20px; /* Reduced for mobile */
+  }
+}
+
 @media screen and (max-width: 768px) {
+  section.hero.is-light .container.is-max-desktop {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  
   .hero-body {
     padding: 2rem 1rem;
+  }
+  
+  .apple-title-container {
+    padding: 60px 24px 30px;
+  }
+  
+  .hero-left-panel {
+    padding: 30px 24px;
+  }
+  
+  .hero-right-panel {
+    padding: 20px 16px 60px;
+  }
+  
+  .hero-content-wrapper {
+    max-width: 100%;
   }
   
   .publication-header .hero-body {
     padding: 3rem 1rem 2rem;
   }
   
-  .publication-title {
-    font-size: 2.5rem !important;
+  .publication-title:not(.apple-title) {
+    font-size: 2.2rem !important;
     line-height: 1.2 !important;
     margin-bottom: 1.5rem !important;
+    letter-spacing: -0.02em !important;
+  }
+  
+  /* Apple title - ensure it overrides publication-title */
+  .publication-title.apple-title,
+  .apple-title {
+    letter-spacing: -0.05em !important; /* Tighter tracking on mobile */
+    margin: 0 !important; /* Reset all margins */
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    line-height: 1 !important;
+  }
+  
+  .apple-title .title-main {
+    font-size: clamp(1.8rem, 3vw + 0.8rem, 2.8rem) !important; /* Smaller on mobile */
+    margin: 0 !important;
+    margin-bottom: -0.15em !important;
+    padding: 0;
+  }
+  
+  .apple-title .title-subtitle {
+    font-size: clamp(1.1rem, 1.7vw + 0.5rem, 1.6rem) !important; /* Increased on mobile */
+    margin: 0 !important;
+    padding: 0;
+  }
+  
+  .conference-badge {
+    font-size: 0.75rem;
+    margin-bottom: 12px;
   }
   
   .publication-authors {
     font-size: 1rem !important;
   }
   
-  .button {
+  /* Authors use clamp() so responsive automatically - no override needed */
+  
+  .authors-block-module {
+    padding-left: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .authors-block-module::before {
+    width: 2px;
+  }
+  
+  .apple-affiliations {
+    font-size: 1.1rem !important;
+  }
+  
+  .apple-abstract {
+    margin: 40px 0 30px;
+  }
+  
+  .apple-abstract p {
+    font-size: 1.1rem;
+  }
+  
+  .apple-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .apple-button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .button:not(.apple-button) {
     margin: 0.25rem !important;
     font-size: 0.875rem !important;
     padding: 0.75rem 1rem !important;
+  }
+  
+  .apple-teaser-image {
+    max-height: 60vh;
   }
   
   .more-works-container {
     bottom: 2rem;
     right: 1rem;
     top: auto;
+    left: auto;
   }
   
   .more-works-btn {
@@ -640,6 +1206,7 @@ code {
     right: -1rem;
     bottom: calc(100% + 0.5rem);
     top: auto;
+    left: auto;
   }
   
   .results-carousel .item {
@@ -657,19 +1224,109 @@ code {
 }
 
 @media screen and (max-width: 480px) {
-  .publication-title {
-    font-size: 2rem !important;
+  section.hero.is-light .container.is-max-desktop {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .publication-title:not(.apple-title) {
+    font-size: 1.8rem !important;
+    letter-spacing: -0.01em !important;
+  }
+  
+  .apple-title-container {
+    padding: 30px 20px 20px; /* Reduced: 40px→30px top */
+  }
+  
+  /* Apple title - ensure it overrides publication-title */
+  .publication-title.apple-title,
+  .apple-title {
+    letter-spacing: -0.04em !important; /* Tighter tracking on small mobile */
+    margin: 0 !important; /* Reset all margins */
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    line-height: 1 !important;
+  }
+  
+  .apple-title .title-main {
+    font-size: clamp(1.6rem, 2.5vw + 0.6rem, 2.4rem) !important; /* Even smaller on small mobile */
+    margin: 0 !important;
+    margin-bottom: -0.15em !important;
+    padding: 0;
+  }
+  
+  .apple-title .title-subtitle {
+    font-size: clamp(1.05rem, 1.5vw + 0.4rem, 1.4rem) !important; /* Increased on small mobile */
+    margin: 0 !important;
+    padding: 0;
+  }
+  
+  .conference-badge {
+    font-size: 0.7rem;
+    margin-bottom: 8px; /* Reduced: 10px→8px */
+    padding: 4px 10px;
+  }
+  
+  .hero-left-panel {
+    padding: 24px 20px; /* Reduced: 20px→24px vertical */
+  }
+  
+  .hero-right-panel {
+    padding: 20px 12px 40px;
+  }
+  
+  .authors-block-module {
+    padding-left: 16px;
+    margin-bottom: 20px; /* Reduced: 32px→20px */
+  }
+  
+  .authors-block-module::before {
+    width: 2px;
+  }
+  
+  .affiliation-group {
+    gap: 12px; /* Reduced gap on mobile */
+  }
+  
+  .lab-logos {
+    gap: 14px; /* Increased: 8px→14px for mobile */
+  }
+  
+  .lab-logo-img {
+    height: 34px; /* Increased: 28px→34px */
+    max-width: 140px; /* Increased: 110px→140px */
+  }
+  
+  .apple-affiliations {
+    font-size: clamp(1rem, 1.2vw + 0.5rem, 1.25rem) !important; /* Larger on mobile */
+  }
+  
+  .apple-affiliations .eql-cntrb {
+    margin-left: 0; /* No margin needed since it's at the top */
+  }
+  
+  .apple-abstract {
+    margin: 20px 0 18px; /* Reduced: 32px→20px top, 24px→18px bottom */
+  }
+  
+  .apple-abstract p {
+    font-size: 1rem;
+    line-height: 1.6;
   }
   
   .hero-body {
     padding: 1.5rem 0.75rem;
   }
   
+  .apple-teaser-image {
+    max-height: 50vh;
+  }
+  
   .more-works-container {
-    position: fixed;
     bottom: 2rem;
     right: 1rem;
-    z-index: 1000;
+    top: auto;
+    left: auto;
   }
   
   .more-works-btn {
@@ -678,11 +1335,12 @@ code {
   }
   
   .more-works-dropdown {
-    position: absolute;
     bottom: calc(100% + 0.5rem);
     right: 0;
     width: calc(100vw - 2rem);
     max-width: 90vw;
+    top: auto;
+    left: auto;
   }
   
   .link-block {
@@ -690,7 +1348,12 @@ code {
     margin-bottom: 0.5rem;
   }
   
-  .button {
+  .button:not(.apple-button) {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .apple-button {
     width: 100%;
     justify-content: center;
   }
@@ -742,10 +1405,16 @@ a:focus {
     animation: none;
   }
   
-  .button {
+  .button:not(.apple-button) {
     background: transparent !important;
     color: var(--text-primary) !important;
     box-shadow: none !important;
+  }
+  
+  .apple-button {
+    background: rgba(0, 26, 51, 0.8) !important;
+    color: #ffffff !important;
+    backdrop-filter: none !important;
   }
 }
 

@@ -130,7 +130,7 @@ body {
 
 /* Environment Navigation Container */
 .environment-nav-container {
-  height: 130px;
+  height: 180px; /* Increased from 130px to 180px */
   background-color: var(--bg-secondary);
   overflow: hidden;
   position: relative;
@@ -175,7 +175,7 @@ body {
 .environment-card {
   display: flex;
   flex-direction: column;
-  width: 120px;
+  width: 160px; /* Increased from 120px to 160px */
   flex-shrink: 0;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -194,14 +194,8 @@ body {
 
 .card-image-wrapper {
   position: relative;
-  width: 120px;
-  height: 72px;
-  overflow: hidden;
-  background-color: var(--bg-tertiary);
-  /* Double black border - maze wall style */
-  border: 4px double var(--black);
-  box-shadow: none;
-  transition: all 0.2s ease;
+  width: 160px; /* Increased from 120px to 160px */
+  height: 96px; /* Increased from 72px to 96px */
 }
 
 .environment-card:hover .card-image-wrapper {
@@ -247,8 +241,8 @@ body {
 }
 
 .card-label {
-  margin-top: 6px;
-  font-size: 10px;
+  margin-top: 8px; /* Increased from 6px */
+  font-size: 12px; /* Increased from 10px to make text larger */
   font-weight: 600;
   color: var(--text-primary);
   text-align: center;

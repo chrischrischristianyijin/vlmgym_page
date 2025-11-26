@@ -13,6 +13,7 @@
   
   <div class="environment-nav-container">
     <div class="environment-nav-scroll" id="environmentNavScroll">
+      <div class="environment-cards-wrapper" id="environmentCardsWrapper">
       <div class="environment-card" data-env="ToyMaze3DEnv-v0" onclick="selectEnvironment('ToyMaze3DEnv-v0')">
         <div class="card-image-wrapper">
           <img class="card-image" src="static/appendix/ToyMaze3DEnv-v0/image_0.png" alt="ToyMaze3D" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%2260%22%3E%3Crect fill=%22%23e0e0e0%22 width=%22100%22 height=%2260%22/%3E%3Ctext x=%2250%22 y=%2230%22 text-anchor=%22middle%22 fill=%22%23999%22 font-size=%2212%22%3EToyMaze3D%3C/text%3E%3C/svg%3E'" />
@@ -138,6 +139,10 @@
           <div class="card-status-bar"></div>
         </div>
         <div class="card-label">ZoomIn</div>
+      </div>
+      </div>
+      <!-- Duplicate cards for seamless loop -->
+      <div class="environment-cards-wrapper" id="environmentCardsWrapperDuplicate">
       </div>
     </div>
   </div>
@@ -496,6 +501,12 @@
         return;
       }
       
+      // Update currentEnvironmentIndex to match the loaded environment
+      const envIndex = environments.indexOf(envName);
+      if (envIndex !== -1) {
+        currentEnvironmentIndex = envIndex;
+      }
+      
       // Reset step cycle count when loading new environment
       stepCycleCount = 0;
       
@@ -505,6 +516,18 @@
       currentEnvironment = envName;
       currentStepIndex = -1; // Start at briefing state (-1 means briefing, 0 means stepId 1)
       traceData = [];
+      
+      // Reset opacity for fade in effect
+      const dashboardContainer = document.getElementById('dashboardContainer');
+      const missionDataContainer = document.getElementById('missionDataContainer');
+      if (dashboardContainer) {
+        dashboardContainer.style.opacity = '0';
+        dashboardContainer.style.transition = 'opacity 0.5s ease-in';
+      }
+      if (missionDataContainer) {
+        missionDataContainer.style.opacity = '0';
+        missionDataContainer.style.transition = 'opacity 0.5s ease-in';
+      }
       
       // Show loading state
       document.getElementById('stepIndicator').textContent = 'Loading environment...';
@@ -517,7 +540,6 @@
       document.getElementById('designContext').innerHTML = loadingText + '<span class="goal-cursor">█</span>';
       
       // Show mission briefing container
-      const missionDataContainer = document.getElementById('missionDataContainer');
       if (missionDataContainer) missionDataContainer.style.display = 'flex';
 
       try {
@@ -542,7 +564,18 @@
         updateDisplay();
         updateNavigationButtons();
         
-        // Wait 8 seconds at briefing, then auto-start playing to stepId === 1
+        // Fade in effect after loading
+        setTimeout(() => {
+          if (dashboardContainer) {
+            dashboardContainer.style.opacity = '1';
+          }
+          if (missionDataContainer) {
+            missionDataContainer.style.opacity = '1';
+          }
+        }, 100);
+        
+        // Wait shorter time at briefing if auto-cycling (3 seconds), otherwise 8 seconds
+        const briefingDelay = isAutoCyclingEnvironments ? 3000 : 8000;
         setTimeout(() => {
           if (currentEnvironment === envName) {
             currentStepIndex = 0; // Move to stepId === 1
@@ -550,7 +583,7 @@
             updateNavigationButtons();
             startPlaying();
           }
-        }, 8000);
+        }, briefingDelay);
       } catch (error) {
         console.error('Error loading environment:', error);
         document.getElementById('imagePlaceholder').innerHTML = 
@@ -767,10 +800,18 @@
       }
       
       // Show dashboard content when not in briefing
-      if (dashboardContainer) dashboardContainer.style.display = 'flex';
+      if (dashboardContainer) {
+        dashboardContainer.style.display = 'flex';
+        // Ensure opacity is set for smooth transition
+        if (!dashboardContainer.style.opacity) {
+          dashboardContainer.style.opacity = '1';
+        }
+      }
       
       // Hide mission briefing when stepId >= 1
-      if (missionDataContainer) missionDataContainer.style.display = 'none';
+      if (missionDataContainer) {
+        missionDataContainer.style.display = 'none';
+      }
       
       if (traceData.length === 0 || currentStepIndex >= traceData.length || currentStepIndex < 0) {
         return;
@@ -996,22 +1037,36 @@
           updateDisplay();
           updateNavigationButtons();
         } else {
-          // Loop back to briefing (not first step)
-          currentStepIndex = -1;
-          stepCycleCount++;
-          updateDisplay();
-          updateNavigationButtons();
-          
-          // If auto-cycling environments and completed cycles, switch to next environment
-          if (isAutoCyclingEnvironments && stepCycleCount >= maxCyclesPerEnvironment) {
-            stepCycleCount = 0;
-            // Wait a bit then switch to next environment
+          // Reached the last step - switch to next environment if auto-cycling
+          if (isAutoCyclingEnvironments) {
+            // Stop current playback
+            stopPlaying();
+            // Add fade out effect before switching
+            const dashboardContainer = document.getElementById('dashboardContainer');
+            const missionDataContainer = document.getElementById('missionDataContainer');
+            
+            if (dashboardContainer) {
+              dashboardContainer.style.opacity = '0';
+              dashboardContainer.style.transition = 'opacity 0.5s ease-out';
+            }
+            if (missionDataContainer) {
+              missionDataContainer.style.opacity = '0';
+              missionDataContainer.style.transition = 'opacity 0.5s ease-out';
+            }
+            
+            // Wait for fade out, then switch to next environment
             setTimeout(() => {
-              if (isAutoCyclingEnvironments) {
+              if (isAutoCyclingEnvironments && currentEnvironment) {
                 currentEnvironmentIndex = (currentEnvironmentIndex + 1) % environments.length;
                 loadEnvironment(environments[currentEnvironmentIndex]);
               }
-            }, 1000);
+            }, 500); // Wait for fade out animation
+          } else {
+            // If not auto-cycling, loop back to briefing
+            currentStepIndex = -1;
+            stepCycleCount++;
+            updateDisplay();
+            updateNavigationButtons();
           }
         }
       }, playIntervalDelay);
@@ -1102,22 +1157,43 @@
       cards.forEach(card => {
         if (card.getAttribute('data-env') === envName) {
           card.classList.add('active');
-          // Scroll into view
-          card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         } else {
           card.classList.remove('active');
         }
       });
     }
 
+    // Initialize auto-scrolling environment cards
+    function initEnvironmentCardsScroll() {
+      const wrapper = document.getElementById('environmentCardsWrapper');
+      const duplicateWrapper = document.getElementById('environmentCardsWrapperDuplicate');
+      
+      if (!wrapper || !duplicateWrapper) return;
+      
+      // Clone all cards to duplicate wrapper for seamless loop
+      const cards = wrapper.querySelectorAll('.environment-card');
+      cards.forEach(card => {
+        const clonedCard = card.cloneNode(true);
+        // Re-attach click handlers
+        const envName = clonedCard.getAttribute('data-env');
+        if (envName) {
+          clonedCard.onclick = () => selectEnvironment(envName);
+        }
+        duplicateWrapper.appendChild(clonedCard);
+      });
+    }
+
     // Initialize on page load
     window.addEventListener('DOMContentLoaded', function() {
+      // Initialize auto-scrolling cards
+      initEnvironmentCardsScroll();
       // Start auto-cycling through all environments immediately
       startAutoCyclingEnvironments();
     });
     
     // Also try to start immediately if DOM is already loaded
     if (document.readyState !== 'loading') {
+      initEnvironmentCardsScroll();
       startAutoCyclingEnvironments();
     }
   </script>

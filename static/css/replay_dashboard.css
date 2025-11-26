@@ -130,7 +130,7 @@ body {
 
 /* Environment Navigation Container */
 .environment-nav-container {
-  height: 180px; /* Increased from 130px to 180px */
+  height: 240px !important; /* Increased from 130px to 240px - much larger */
   background-color: var(--bg-secondary);
   overflow: hidden;
   position: relative;
@@ -142,14 +142,44 @@ body {
 .environment-nav-scroll {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 20px;
+  gap: 0;
+  padding: 12px 0;
   height: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
+  overflow: hidden;
+  position: relative;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 100%;
+}
+
+.environment-nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.environment-cards-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  height: 100%;
+  flex-shrink: 0;
+  animation: scrollEnvironments 120s linear infinite;
+  will-change: transform;
+}
+
+@keyframes scrollEnvironments {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause animation on hover */
+.environment-nav-container:hover .environment-cards-wrapper {
+  animation-play-state: paused;
+}
   scrollbar-color: var(--black) transparent;
 }
 
@@ -175,7 +205,7 @@ body {
 .environment-card {
   display: flex;
   flex-direction: column;
-  width: 160px; /* Increased from 120px to 160px */
+  width: 220px !important; /* Increased from 120px to 220px - much larger */
   flex-shrink: 0;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -194,8 +224,14 @@ body {
 
 .card-image-wrapper {
   position: relative;
-  width: 160px; /* Increased from 120px to 160px */
-  height: 96px; /* Increased from 72px to 96px */
+  width: 220px !important; /* Increased from 120px to 220px - much larger */
+  height: 132px !important; /* Increased from 72px to 132px - much larger */
+  overflow: hidden;
+  background-color: var(--bg-tertiary);
+  /* Double black border - maze wall style */
+  border: 4px double var(--black);
+  box-shadow: none;
+  transition: all 0.2s ease;
 }
 
 .environment-card:hover .card-image-wrapper {
@@ -241,8 +277,8 @@ body {
 }
 
 .card-label {
-  margin-top: 8px; /* Increased from 6px */
-  font-size: 12px; /* Increased from 10px to make text larger */
+  margin-top: 10px !important; /* Increased from 6px */
+  font-size: 14px !important; /* Increased from 10px to 14px - much larger */
   font-weight: 600;
   color: var(--text-primary);
   text-align: center;
@@ -252,7 +288,7 @@ body {
   transition: color 0.2s ease;
   border: 2px solid var(--black);
   background-color: var(--bg-primary);
-  padding: 3px 5px;
+  padding: 5px 8px !important; /* Increased padding */
 }
 
 .environment-card:hover .card-label {
@@ -740,12 +776,12 @@ body {
 .monitor-header {
   background-color: var(--black);
   color: var(--bg-primary);
-  padding: 6px 12px;
+  padding: 8px 14px; /* Increased padding */
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: 'Courier New', monospace;
-  font-size: 9px;
+  font-size: 13px !important; /* Increased from 9px to 13px - much larger */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -758,7 +794,7 @@ body {
 .monitor-status {
   color: var(--yellow-pacman);
   animation: pulse 2s infinite;
-  font-size: 10px;
+  font-size: 14px !important; /* Increased from 10px to 14px - much larger */
 }
 
 @keyframes pulse {
@@ -767,23 +803,23 @@ body {
 }
 
 .monitor-screen {
-  padding: 10px;
+  padding: 14px; /* Increased from 10px */
   background-color: var(--bg-tertiary);
-  min-height: 90px;
+  min-height: 110px; /* Increased from 90px */
 }
 
 .monitor-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
+  font-size: 12px !important; /* Increased from 8px to 12px - much larger */
   color: var(--black);
-  margin-bottom: 10px;
+  margin-bottom: 12px; /* Increased margin */
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .monitor-content {
   font-family: 'Courier New', monospace;
-  font-size: 11px;
+  font-size: 14px !important; /* Increased from 11px to 14px - much larger */
   color: var(--text-primary);
   line-height: 1.6;
 }
@@ -816,12 +852,13 @@ body {
 .feedback-text {
   white-space: pre-wrap;
   word-wrap: break-word;
-  max-height: 120px;
+  max-height: 150px; /* Increased from 120px */
   overflow-y: auto;
-  padding: 8px;
+  padding: 10px; /* Increased from 8px */
   background-color: var(--bg-primary);
   border: 1px solid var(--black);
-  font-size: 10px;
+  font-size: 14px !important; /* Increased from 10px to 14px - much larger */
+  line-height: 1.7; /* Increased line height for readability */
 }
 
 .feedback-text::-webkit-scrollbar {
@@ -839,12 +876,12 @@ body {
 /* Action Terminal Monitor */
 .action-terminal {
   font-family: 'Courier New', monospace;
-  font-size: 11px;
+  font-size: 16px !important; /* Increased from 11px to 16px - much larger */
   color: var(--black);
-  padding: 8px;
+  padding: 12px; /* Increased from 8px */
   background-color: var(--bg-primary);
   border: 2px solid var(--black);
-  min-height: 50px;
+  min-height: 60px; /* Increased from 50px */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -854,6 +891,7 @@ body {
   position: relative;
   animation: actionPulse 0.5s ease-out;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  line-height: 1.6; /* Added line height for readability */
 }
 
 .action-terminal:hover {

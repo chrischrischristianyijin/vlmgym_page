@@ -92,7 +92,12 @@
   </noscript>
   
   <!-- Fonts - Optimized loading -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- ECharts for Radar Chart -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
   
   <!-- Defer non-critical JavaScript -->
   <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -101,6 +106,7 @@
   <script defer src="static/js/bulma-carousel.min.js"></script>
   <script defer src="static/js/bulma-slider.min.js"></script>
   <script defer src="static/js/index.js"></script>
+  <script defer src="static/js/radar-chart.js"></script>
   
   <!-- Structured Data for Academic Papers -->
   <script type="application/ld+json">
@@ -356,7 +362,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Modern Vision–Language Models (VLMs) remain poorly characterized in multi-step visual interactions, particularly in how they integrate perception, memory, and action over long horizons. We introduce VisGym, a comprehensive gymnasium of 17 diverse environments designed to systematically evaluate and train VLMs on visually interactive tasks. The suite spans multiple domains—including symbolic puzzles, real-image understanding, navigation, and manipulation—and provides flexible controls over difficulty, input representation, planning horizon, and feedback mechanisms. We also provide multi-step solvers that generate structured demonstrations, enabling supervised finetuning approaches. Our comprehensive evaluations reveal that all frontier models struggle significantly in interactive settings, achieving low success rates in both easy (26.8%) and hard (12.6%) configurations. Through detailed experiments, we identify several critical limitations: models fail to effectively leverage long context, performing worse with unbounded history than with truncated windows. Additionally, we find that several text-based symbolic tasks become substantially harder once rendered visually, highlighting the unique challenges of visual reasoning. However, we demonstrate that explicit goal observations, textual feedback, and exploratory demonstrations in partially observable or unknown-dynamics settings yield consistent improvements through supervised finetuning, revealing concrete failure modes and actionable pathways for advancing multi-step visual decision-making. All code, data, and models will be publicly released.
+            Modern Vision–Language Models (VLMs) remain poorly characterized in multi-step visual interactions, particularly in how they integrate perception, memory, and action over long horizons. We introduce <span class="highlight-contribution">VisGym</span>, a comprehensive gymnasium of <span class="highlight-contribution">17 diverse environments</span> designed to <span class="highlight-contribution">systematically evaluate and train VLMs</span> on visually interactive tasks. The suite spans multiple domains—including symbolic puzzles, real-image understanding, navigation, and manipulation—and provides flexible controls over difficulty, input representation, planning horizon, and feedback mechanisms. We also provide multi-step solvers that generate structured demonstrations, enabling supervised finetuning approaches. Our comprehensive evaluations reveal that all frontier models struggle significantly in interactive settings, achieving low success rates in both easy (<span class="stat-easy">26.8%</span>) and hard (<span class="stat-hard">12.6%</span>) configurations. Through detailed experiments, we identify several critical limitations: models <span class="highlight-negative">fail to effectively leverage long context</span>, performing worse with unbounded history than with truncated windows. Additionally, we find that several text-based symbolic tasks become substantially harder once rendered visually, highlighting the unique challenges of visual reasoning. However, we demonstrate that explicit goal observations, textual feedback, and exploratory demonstrations in partially observable or unknown-dynamics settings yield <span class="highlight-negative">consistent improvements through supervised finetuning</span>, revealing concrete failure modes and actionable pathways for advancing multi-step visual decision-making. All code, data, and models will be publicly released.
           </p>
         </div>
       </div>
@@ -365,8 +371,22 @@
 </section>
 <!-- End paper abstract -->
 
+<!-- Radar Chart Comparison Section -->
+<section class="radar-chart-section">
+  <div class="container is-max-desktop">
+    <div class="radar-chart-wrapper">
+      <h2 class="radar-chart-title">Framework Comparison</h2>
+      <p class="radar-chart-subtitle">VisGym's comprehensive coverage across all dimensions</p>
+      <div class="radar-chart-container">
+        <div id="radarChart" class="echarts-radar"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Radar Chart Comparison Section -->
+
 <!-- AI Agent Replay Dashboard -->
-<div class="dashboard-embed-container" style="width: 100%; height: 800px; overflow: hidden;">
+<div class="dashboard-embed-container" style="width: 100%; height: 900px; overflow: hidden;">
   <iframe 
     src="replay_dashboard.html" 
     style="width: 100%; height: 100%; border: none;"
@@ -377,20 +397,22 @@
 <!-- End AI Agent Replay Dashboard -->
 
 <!-- Leaderboard -->
-<section class="hero is-small">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <h2 class="title is-3 has-text-centered">Leaderboard</h2>
-      <div class="content has-text-justified" style="margin-bottom: 2rem;">
-        <p>
-          Even the best-performing frontier model, GPT-5, achieves only 26.43% on VisGym (Easy) and 12.57% on VisGym (Hard), indicating that VisGym poses a significant challenge for existing models.
-        </p>
-        <p class="has-text-centered" style="margin-top: 1rem;">
-          Success rates across different models on VisGym environments.
+<section class="leaderboard-section">
+  <div class="leaderboard-wrapper">
+    <div class="leaderboard-header">
+      <h2 class="leaderboard-title">Leaderboard</h2>
+      <div class="leaderboard-description">
+        <p class="leaderboard-intro">
+          Even the best-performing frontier model, GPT-5, achieves only <strong class="leaderboard-stat">26.43%</strong> on VisGym (Easy) and <strong class="leaderboard-stat">12.57%</strong> on VisGym (Hard), indicating that VisGym poses a significant challenge for existing models.
         </p>
       </div>
-      <div class="leaderboard-container" style="width: 100%; display: flex; justify-content: center; align-items: center;">
-        <img src="static/images/success_rate_per_model.png" alt="Success Rate per Model Leaderboard" style="width: 100%; height: auto; display: block; max-width: 100%;">
+    </div>
+    <div class="leaderboard-visual">
+      <div class="leaderboard-image-container">
+        <img src="static/images/success_rate_per_model.png" alt="Success Rate per Model Leaderboard" class="leaderboard-image">
+        <p class="leaderboard-subtitle">
+          Success rates across different models on VisGym environments.
+        </p>
       </div>
     </div>
   </div>

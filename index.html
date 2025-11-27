@@ -414,7 +414,7 @@
 <!-- End Radar Chart Comparison Section -->
 
 <!-- Frontier VLMs Fail Section -->
-<section class="frontier-fail-section" style="padding: 4rem 0; background-color: #ffffff;">
+<section class="frontier-fail-section" style="padding: 2rem 0 1rem 0; background-color: #ffffff;">
   <div class="container is-max-desktop" style="max-width: 100%; padding-left: 20px; padding-right: 20px;">
     <div class="frontier-fail-content">
       <h2 class="frontier-fail-title">Frontier VLMs Fail on VisGym</h2>
@@ -441,7 +441,7 @@
 <!-- End Frontier VLMs Fail Section -->
 
 <!-- Task Success Rate Table -->
-<section class="task-success-rate-section" style="padding: 3rem 0; background-color: #fafafa; width: 100%;">
+<section class="task-success-rate-section" style="padding: 1rem 0 3rem 0; background-color: #fafafa; width: 100%;">
   <iframe 
     src="task_success_rate.html" 
     style="width: calc(100% - 40px); min-height: 1000px; height: auto; border: none; display: block; margin: 0 auto; padding: 0;"
@@ -450,32 +450,29 @@
     onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';">
   </iframe>
 </section>
-<!-- End Task Success Rate Table -->
-
-<!-- Performance Analysis Section -->
-<section class="performance-analysis-section" style="padding: 4rem 0; background-color: #fafafa;">
-  <div class="container is-max-desktop" style="max-width: 100%; padding-left: 20px; padding-right: 20px;">
-    <div class="performance-analysis-content">
-      <h2 class="performance-analysis-title">Performance Analysis</h2>
-      
-      <div class="performance-images-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
-        <div class="performance-image-item">
-          <div class="performance-image-container">
-            <img src="static/images/num_steps_density_curves_reward.png" alt="Number of Steps Density Curves and Reward" style="width: 100%; height: auto; display: block; background: transparent; border: none; box-shadow: none;">
-          </div>
-        </div>
-        
-        <div class="performance-image-item">
-          <div class="performance-image-container">
-            <iframe src="static/pdfs/avg_performance.pdf" style="width: 100%; height: 600px; border: none; display: block; background: transparent;"></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- Key Insights Section -->
+<section class="key-insights-section" style="padding: 0; background-color: #ffffff; width: 100%;">
+  <iframe 
+    src="key_insights.html" 
+    style="width: 100%; min-height: 2000px; height: auto; border: none; display: block; margin: 0; padding: 0;"
+    title="Deep Insights & Discoveries"
+    allowfullscreen
+    onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';">
+  </iframe>
 </section>
-<!-- End Performance Analysis Section -->
+<!-- End Key Insights Section -->
 
+<!-- Failure Analysis Section -->
+<section class="failure-analysis-section" style="padding: 0; background-color: #ffffff; width: 100%;">
+  <iframe 
+    src="failure_analysis.html" 
+    style="width: 100%; min-height: 2000px; height: auto; border: none; display: block; margin: 0; padding: 0;"
+    title="Qualitative Failure Analysis"
+    allowfullscreen
+    onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';">
+  </iframe>
+</section>
+<!-- End Failure Analysis Section -->
 
 
 

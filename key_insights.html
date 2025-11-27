@@ -34,30 +34,28 @@
     <div class="max-w-6xl mx-auto px-4">
         <div class="flex flex-col md:flex-row gap-12 items-center">
             <div class="w-full md:w-1/2">
-                <div class="bg-white p-2 rounded-2xl shadow-xl border border-gray-200 relative overflow-hidden group">
+                <!-- Example Selector -->
+                <div class="mb-4 flex gap-2 justify-center flex-wrap">
+                    <button onclick="selectExample(0)" id="example-btn-0" class="px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold transition-all">Sliding Block</button>
+                    <button onclick="selectExample(1)" id="example-btn-1" class="px-3 py-1 rounded-full text-gray-500 text-xs font-bold transition-all">Matchstick Equation</button>
+                    <button onclick="selectExample(2)" id="example-btn-2" class="px-3 py-1 rounded-full text-gray-500 text-xs font-bold transition-all">Maze 2D</button>
+                    <button onclick="selectExample(3)" id="example-btn-3" class="px-3 py-1 rounded-full text-gray-500 text-xs font-bold transition-all">Patch Reassembly</button>
+                </div>
+                
+                <div id="display-container" class="bg-white p-2 rounded-2xl border border-red-500 relative overflow-hidden group transition-all duration-500" style="box-shadow: 0 0 15px rgba(239, 68, 68, 0.3), 0 0 30px rgba(239, 68, 68, 0.2), 0 0 45px rgba(239, 68, 68, 0.1);">
                     <div class="absolute top-4 left-0 right-0 flex justify-center z-20">
-                        <div class="bg-white/90 backdrop-blur rounded-full p-1 border border-gray-200 shadow-sm flex items-center cursor-pointer" onclick="toggleAscii()">
-                            <div id="btn-visual" class="px-4 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold transition-all">Visual Input</div>
-                            <div id="btn-text" class="px-4 py-1 rounded-full text-gray-500 text-xs font-bold transition-all">ASCII Input</div>
+                        <div class="bg-white/90 backdrop-blur rounded-full p-1 border border-gray-200 shadow-sm flex items-center">
+                            <div id="btn-visual" onclick="selectVisual()" class="px-4 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold transition-all cursor-pointer hover:bg-blue-200">Visual Input</div>
+                            <div id="btn-text" onclick="selectASCII()" class="px-4 py-1 rounded-full text-gray-500 text-xs font-bold transition-all cursor-pointer hover:bg-gray-100">ASCII Input</div>
                         </div>
                     </div>
 
                     <div class="relative h-80 bg-gray-100 rounded-xl flex items-center justify-center mt-10 overflow-hidden">
-                        <img id="img-layer" src="assets/insights/matchstick_img.png" class="absolute w-3/4 transition-opacity duration-500 opacity-100" alt="Visual Input" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center text-gray-400\'><p>Visual Input Preview</p></div>';">
+                        <img id="img-layer" src="static/text_mode_compare/matchstick_equation.png" class="absolute w-3/4 transition-opacity duration-500 opacity-100" alt="Visual Input" style="object-fit: contain;">
                         
-                        <div id="ascii-layer" class="absolute w-full h-full bg-black flex items-center justify-center opacity-0 transition-opacity duration-500">
-                            <pre class="text-green-400 text-[8px] leading-[8px] font-mono">
-  111   111       111
-  111 + 111   =   111
-  111   111       111
-                            </pre>
+                        <div id="ascii-layer" class="absolute w-full h-full bg-black flex items-center justify-center opacity-0 transition-opacity duration-500 overflow-auto p-4">
+                            <div id="ascii-content" class="text-green-400 text-[10px] leading-[12px] font-mono whitespace-pre-wrap flex gap-8"></div>
                         </div>
-                    </div>
-
-                    <div class="absolute bottom-6 right-6 bg-white p-4 rounded-lg shadow-lg border border-gray-100 z-20 text-center w-40 transition-transform transform hover:scale-105">
-                        <div class="text-xs text-gray-500 uppercase font-bold mb-1">Success Rate</div>
-                        <div id="stat-number" class="text-3xl font-extrabold text-gray-400 transition-all duration-700">12.9%</div>
-                        <div id="stat-delta" class="text-xs text-green-600 font-bold opacity-0 transition-opacity">▲ 4x Boost</div>
                     </div>
                 </div>
             </div>
@@ -81,8 +79,10 @@
 <section class="w-full py-16 bg-white">
     <div class="max-w-6xl mx-auto px-4">
         <div class="flex flex-col md:flex-row-reverse gap-12 items-center">
-            <div class="w-full md:w-1/2 h-[500px]">
-                <div id="scatter-chart" class="w-full h-full"></div>
+            <div class="w-full md:w-1/2">
+                <div class="bg-white p-4 rounded-2xl shadow-xl border border-gray-200">
+                    <img src="static/images/sft_ablations.png" alt="SFT Ablations: Vision vs LLM Gains" class="w-full h-auto object-contain" style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
+                </div>
             </div>
 
             <div class="w-full md:w-1/2 space-y-6">
@@ -155,107 +155,155 @@
 </section>
 
 <script>
-    // 1. Toggle Logic for Section 1
-    function toggleAscii() {
+    // Examples data: [visual image path, ascii text]
+    const examples = [
+        {
+            name: "Sliding Block",
+            visual: "static/text_mode_compare/sliding_block.png",
+            ascii: "Target Current\n\n3114 | 3114\n\n3114 | 3114\n\n226. | 5226\n\n576. | 5906\n\n5890 | 7.8."
+        },
+        {
+            name: "Matchstick Equation",
+            visual: "static/text_mode_compare/matchstick_equation.png",
+            ascii: " _   _         _   _       _           _   _   _ \n\n  | |_|   _     |  | |_|   _   |_|   _    |  |  |\n\n  | |_|         |  |  _|       | |        |  |  |\n\n                                                 \n\n 0   1    2    3   4  5    6    7    8    9   10"
+        },
+        {
+            name: "Maze 2D",
+            visual: "static/text_mode_compare/maze2d.png",
+            ascii: "#############\n#           #\n## #      A##\n## ####### ##\n## #     # ##\n## ### ### ##\n##         ##\n## ####### ##\n##   #     ##\n## # ####### \n##T#       ##\n#############\n#############"
+        },
+        {
+            name: "Patch Reassembly",
+            visual: "static/text_mode_compare/patch_reassembly.png",
+            ascii: "  0 1 2 3 4\n  ---------\n0 | 0 0 . . .\n\n1 | 0 0 0 0 .\n\n2 | . . . . .\n\n3 | . . . . .\n\n4 | . . . . .",
+            asciiPart2: "--- Parked Patches ---\n\n\nPatch 1:\n  *\n  1\n  1\n  1\n  1\n\n\nPatch 2:\n  *\n  22\n\n\nPatch 3:\n  *3\n  3\n  3\n\n\nPatch 4:\n  *4\n  444\n  44",
+            isTwoColumn: true
+        }
+    ];
+
+    let currentExample = 0;
+    let isVisual = true;
+    let autoPlayInterval = null;
+
+    // Select example
+    function selectExample(index) {
+        currentExample = index;
+        
+        // Update button styles
+        for (let i = 0; i < 4; i++) {
+            const btn = document.getElementById(`example-btn-${i}`);
+            if (i === index) {
+                btn.className = "px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold transition-all";
+            } else {
+                btn.className = "px-3 py-1 rounded-full text-gray-500 text-xs font-bold transition-all";
+            }
+        }
+        
+        // Update content
+        updateDisplay();
+        
+        // Restart auto-play
+        startAutoPlay();
+    }
+
+    // Update display
+    function updateDisplay() {
         const imgLayer = document.getElementById('img-layer');
         const asciiLayer = document.getElementById('ascii-layer');
+        const asciiContent = document.getElementById('ascii-content');
         const btnVisual = document.getElementById('btn-visual');
         const btnText = document.getElementById('btn-text');
-        const statNum = document.getElementById('stat-number');
-        const statDelta = document.getElementById('stat-delta');
-
-        if (imgLayer.style.opacity === '0') {
-            // Switch back to Visual
-            imgLayer.style.opacity = '1';
-            asciiLayer.style.opacity = '0';
-            btnVisual.className = "px-4 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold transition-all";
-            btnText.className = "px-4 py-1 rounded-full text-gray-500 text-xs font-bold transition-all";
+        const displayContainer = document.getElementById('display-container');
+        
+        const example = examples[currentExample];
+        
+        if (isVisual) {
+            // Show visual - preload image to avoid flickering
+            const newImg = new Image();
+            newImg.onload = function() {
+                imgLayer.src = example.visual;
+                imgLayer.style.opacity = '1';
+            };
+            newImg.onerror = function() {
+                console.error('Failed to load image:', example.visual);
+                imgLayer.style.opacity = '1';
+            };
+            newImg.src = example.visual;
             
-            statNum.innerText = "12.9%";
-            statNum.classList.replace('text-blue-600', 'text-gray-400');
-            statDelta.style.opacity = '0';
+            asciiLayer.style.opacity = '0';
+            // Red button for Visual Input
+            btnVisual.className = "px-4 py-1 rounded-full bg-red-500 text-white text-xs font-bold transition-all cursor-pointer hover:bg-red-600";
+            btnVisual.style.boxShadow = "0 0 8px rgba(239, 68, 68, 0.3), 0 0 15px rgba(239, 68, 68, 0.2)";
+            btnText.className = "px-4 py-1 rounded-full text-gray-500 text-xs font-bold transition-all cursor-pointer hover:bg-gray-100";
+            btnText.style.boxShadow = "none";
+            // Red glowing border for Visual Input (thin border, glow only)
+            displayContainer.className = "bg-white p-2 rounded-2xl border border-red-500 relative overflow-hidden group transition-all duration-500";
+            displayContainer.style.boxShadow = "0 0 15px rgba(239, 68, 68, 0.3), 0 0 30px rgba(239, 68, 68, 0.2), 0 0 45px rgba(239, 68, 68, 0.1)";
         } else {
-            // Switch to Text
+            // Show ASCII
             imgLayer.style.opacity = '0';
             asciiLayer.style.opacity = '1';
-            btnVisual.className = "px-4 py-1 rounded-full text-gray-500 text-xs font-bold transition-all";
-            btnText.className = "px-4 py-1 rounded-full bg-blue-600 text-white text-xs font-bold transition-all";
+            btnVisual.className = "px-4 py-1 rounded-full text-gray-500 text-xs font-bold transition-all cursor-pointer hover:bg-gray-100";
+            btnVisual.style.boxShadow = "none";
+            // Green button for ASCII Input
+            btnText.className = "px-4 py-1 rounded-full bg-green-500 text-white text-xs font-bold transition-all cursor-pointer hover:bg-green-600";
+            btnText.style.boxShadow = "0 0 8px rgba(34, 197, 94, 0.3), 0 0 15px rgba(34, 197, 94, 0.2)";
+            // Green glowing border for ASCII Input (thin border, glow only)
+            displayContainer.className = "bg-white p-2 rounded-2xl border border-green-500 relative overflow-hidden group transition-all duration-500";
+            displayContainer.style.boxShadow = "0 0 15px rgba(34, 197, 94, 0.3), 0 0 30px rgba(34, 197, 94, 0.2), 0 0 45px rgba(34, 197, 94, 0.1)";
             
-            statNum.innerText = "58.6%"; // GPT-5 Score [cite: 306]
-            statNum.classList.replace('text-gray-400', 'text-blue-600');
-            statDelta.style.opacity = '1';
+            // Handle two-column display for Patch Reassembly
+            if (example.asciiPart2) {
+                // Two columns side by side
+                asciiContent.className = "text-green-400 text-[10px] leading-[12px] font-mono flex gap-8 items-start";
+                asciiContent.innerHTML = `<pre class="text-green-400 text-[10px] leading-[12px] font-mono whitespace-pre-wrap flex-shrink-0">${example.ascii}</pre><pre class="text-green-400 text-[10px] leading-[12px] font-mono whitespace-pre-wrap flex-shrink-0">${example.asciiPart2}</pre>`;
+            } else {
+                // Single column for other examples
+                asciiContent.className = "text-green-400 text-[10px] leading-[12px] font-mono whitespace-pre-wrap";
+                asciiContent.innerHTML = `<pre class="text-green-400 text-[10px] leading-[12px] font-mono whitespace-pre-wrap">${example.ascii}</pre>`;
+            }
         }
     }
 
-    // 2. Scatter Chart Logic for Section 2
-    var chartDom = document.getElementById('scatter-chart');
-    var myChart = echarts.init(chartDom);
-    var option = {
-        grid: { top: 40, right: 40, bottom: 40, left: 50 },
-        tooltip: {
-            formatter: function (param) {
-                return `<div class="font-bold mb-1">${param.data[2]}</div>
-                        <span class="text-blue-600">●</span> Vision Gain: ${param.data[1].toFixed(2)}<br>
-                        <span class="text-orange-500">●</span> LLM Gain: ${param.data[0].toFixed(2)}`;
-            },
-            backgroundColor: 'rgba(255,255,255,0.95)',
-            borderColor: '#eee',
-            textStyle: { color: '#333' }
-        },
-        xAxis: { 
-            name: 'LLM Gain (Reasoning)', 
-            nameLocation: 'middle', 
-            nameGap: 25,
-            splitLine: { show: false },
-            axisLine: { lineStyle: { color: '#666' } }
-        },
-        yAxis: { 
-            name: 'Vision Gain (Perception)', 
-            nameLocation: 'middle', 
-            nameGap: 35, 
-            splitLine: { lineStyle: { type: 'dashed' } },
-            axisLine: { lineStyle: { color: '#666' } }
-        },
-        series: [{
-            type: 'scatter',
-            symbolSize: 15,
-            // Data format: [LLM Gain, Vision Gain, Task Name, Type]
-            // Derived from Paper Figure 10 [cite: 460-462]
-            data: [
-                [0.18, 0.43, "Zoom-In", "Full"], [0.15, 0.17, "Patch", "Full"], 
-                [0.33, 0.13, "Color", "Full"], [0.45, 0.20, "Video", "Full"],
-                [0.35, -0.10, "Maze 3D", "Partial"], [0.68, 0.11, "Match Rot", "Partial"],
-                [0.63, 0.07, "Jigsaw", "Full"], [0.52, 0.04, "Ment Rot 3D", "Partial"],
-                [0.60, 0.00, "Ment Rot 2D", "Full"], [0.20, 0.01, "Sliding", "Full"],
-                [0.02, 0.05, "Reach", "Partial"]
-            ],
-            itemStyle: {
-                color: function(params) {
-                    // Orange if LLM > Vision (Below diagonal), Blue otherwise
-                    return params.data[0] > params.data[1] ? '#ED4E33' : '#003262';
-                },
-                shadowBlur: 5,
-                shadowColor: 'rgba(0,0,0,0.2)'
-            },
-            markLine: {
-                animation: false,
-                silent: true,
-                lineStyle: { type: 'dashed', color: '#ccc', width: 2 },
-                data: [[{ coord: [-0.2, -0.2], symbol: 'none' }, { coord: [0.8, 0.8], symbol: 'none' }]]
-            },
-            markArea: {
-                silent: true,
-                itemStyle: { color: 'transparent' },
-                label: { color: '#ccc', fontSize: 20, fontWeight: 'bold', fontFamily: 'Inter' },
-                data: [
-                    [{ name: 'Vision-Favored', xAxis: -0.2, yAxis: 0.8 }, { xAxis: 0.8, yAxis: 0.8 }],
-                    [{ name: 'LLM-Favored', xAxis: 0.8, yAxis: -0.2 }, { xAxis: 0.8, yAxis: -0.2 }]
-                ]
-            }
-        }]
-    };
-    myChart.setOption(option);
-    window.addEventListener('resize', myChart.resize);
+    // Toggle between visual and ASCII
+    function toggleDisplay() {
+        isVisual = !isVisual;
+        updateDisplay();
+    }
+
+    // Manually select Visual Input
+    function selectVisual() {
+        isVisual = true;
+        updateDisplay();
+        // Restart auto-play after manual selection
+        startAutoPlay();
+    }
+
+    // Manually select ASCII Input
+    function selectASCII() {
+        isVisual = false;
+        updateDisplay();
+        // Restart auto-play after manual selection
+        startAutoPlay();
+    }
+
+    // Auto-play: switch between visual and ASCII every 3 seconds
+    function startAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+        }
+        
+        // Auto-toggle every 3 seconds
+        autoPlayInterval = setInterval(() => {
+            toggleDisplay();
+        }, 3000);
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        selectExample(0);
+    });
+
 </script>
 </body>
 </html>

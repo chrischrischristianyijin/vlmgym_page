@@ -1,0 +1,1 @@
+After being told 'Cannot move into a wall.' for left and up, the model continues to try those directions in subsequent steps, e.g., after failing to move left at step 9, it tries left again at steps 11, 13, and 17; after failing to move up at step 10, it tries up again at steps 15, 16, and 18.

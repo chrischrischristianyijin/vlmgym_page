@@ -1,0 +1,3 @@
+I can't move left from here either. Let me continue moving down to explore more of the maze and find an alternative path to the red target.
+
+`('move', 3)`

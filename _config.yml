@@ -1,0 +1,4 @@
+theme: jekyll-theme-minimal
+title: VisGym - Diverse, Customizable, Scalable Environments for Multimodal Agents
+description: VisGym consists of 17 diverse, long-horizon environments designed to systematically evaluate, diagnose, and train Vision-Language Models (VLMs) on visually interactive tasks with different domains, levels of state observability, and types of observations.
+

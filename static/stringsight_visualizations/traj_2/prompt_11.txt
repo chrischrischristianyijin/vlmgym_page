@@ -1,0 +1,3 @@
+Environment feedback: Cannot move into a wall.
+
+This is step 12. You are allowed to take 8 more steps.

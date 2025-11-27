@@ -1,0 +1,3 @@
+Good! I'm back to this position. I'm running low on steps (only 3 left), so I need to think carefully. From what I can see of the maze structure, let me try moving left again to see if I can find a path that leads to the red target.
+
+`('move', 2)`

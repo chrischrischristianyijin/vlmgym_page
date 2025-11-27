@@ -1,0 +1,5 @@
+Eight illegal moves... This is getting ridiculous. I suspect there's a hidden constraint or a misunderstanding of the segment labeling. Let's try a very simple move to see if *anything* works. I will move a match from '1' to '0'.
+
+```
+('move', [1, 0, 0, 0])
+```

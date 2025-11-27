@@ -1,0 +1,3 @@
+I'm down to my last step and haven't found a successful path to the red target. Looking at my options, I can only move down from this position since all other directions are blocked by walls. Let me use my final move.
+
+`('move', 3)`

@@ -1,0 +1,5 @@
+I see that I cannot move left from my current position because there's a wall there. Let me reassess my surroundings.
+
+Looking at my current position (blue circle), I need to find which directions have white paths available. From what I can see, I should try moving up to find an available path.
+
+`('move', 1)`

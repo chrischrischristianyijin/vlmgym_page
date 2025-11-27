@@ -23,6 +23,29 @@
         .animate-spin-slow {
             animation: spin-slow 3s linear infinite;
         }
+        /* Optimize image rendering for low-resolution images */
+        #stringsightImage, #stringsightImage2, #stringsightImage3, #stringsightImage4 {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+            max-width: 100%;
+            max-height: 100%;
+            /* Limit maximum scale to avoid excessive blur */
+            transform: scale(1);
+            transform-origin: center center;
+        }
+        /* Container optimization */
+        #stringsightCarousel, #stringsightCarousel2, #stringsightCarousel3, #stringsightCarousel4 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Use better scaling algorithm when available */
+        @supports (image-rendering: auto) {
+            #stringsightImage, #stringsightImage2, #stringsightImage3, #stringsightImage4 {
+                image-rendering: auto;
+            }
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -36,27 +59,26 @@
 <section class="w-full py-20 border-t border-gray-100">
     <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
         <div class="w-full md:w-3/5 shadow-2xl rounded-xl overflow-hidden border border-gray-200 relative bg-black">
-            <div class="aspect-video bg-gray-800 relative opacity-90">
-                <img src="assets/failures/jigsaw_loop.gif" class="w-full h-full object-cover" alt="Jigsaw Looping" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="w-full h-full bg-gray-800 flex items-center justify-center text-white" style="display: none;">
-                    <p class="text-sm">GIF: Jigsaw puzzle pieces rapidly swapping</p>
-                </div>
+            <div class="aspect-video bg-gray-800 relative opacity-90" id="stringsightCarousel">
+                <!-- StringSight images will be displayed here -->
+                <img id="stringsightImage" src="static/stringsight_visualizations/traj_0/image_0.png" class="transition-opacity duration-500" alt="StringSight Action Looping" style="display: block; width: 100%; height: 100%; object-fit: contain;">
                 <div class="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-sm p-3 rounded text-xs font-mono text-green-400 border border-gray-700 shadow-lg">
-                    <div class="opacity-50">> Action: swap((0,0), (0,1))</div>
-                    <div class="opacity-75">> Action: swap((0,0), (0,1))</div>
-                    <div class="font-bold text-white">> Action: swap((0,0), (0,1)) <span class="animate-pulse">_</span></div>
+                    <div class="opacity-50">> Action: ('swap', ((0, 0), (0, 1)))</div>
+                    <div class="opacity-75">> Action: ('swap', ((0, 0), (0, 1)))</div>
+                    <div class="font-bold text-white">> Action: ('swap', ((0, 0), (0, 1))) <span class="animate-pulse">_</span></div>
+                    <div class="text-xs text-gray-400 mt-2">Step: <span id="stepCounter">1</span> / 7</div>
                 </div>
             </div>
         </div>
         
         <div class="w-full md:w-2/5 space-y-6">
             <div class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-bold tracking-wide">
-                FAILURE MODE 01
+                Action Looping
             </div>
-            <h3 class="text-3xl font-bold berkeley-blue">Action Looping</h3>
+            <h3 class="text-3xl font-bold berkeley-blue">The "Infinite Looper"</h3>
             <p class="text-lg text-gray-600 leading-relaxed">
                 Models often get stuck in a repetitive cycle, acting like a broken record.
-                [cite_start]In this <span class="font-bold">Jigsaw</span> task, GPT-5 repeatedly swaps the same two pieces endlessly, failing to update its strategy despite zero visual progress [cite: 1147-1148].
+                [cite_start]In this <span class="font-bold">StringSight</span> task, the model repeatedly swaps the same two pieces endlessly, failing to update its strategy despite zero visual progress [cite: 1147-1148].
             </p>
             <div class="border-l-4 border-blue-600 pl-4 py-1">
                 <p class="text-sm italic text-gray-500">
@@ -67,31 +89,67 @@
     </div>
 </section>
 
+<script>
+    // StringSight image carousel for Action Looping demonstration
+    (function() {
+        const images = [
+            'static/stringsight_visualizations/traj_0/image_0.png',
+            'static/stringsight_visualizations/traj_0/image_1.png',
+            'static/stringsight_visualizations/traj_0/image_2.png',
+            'static/stringsight_visualizations/traj_0/image_3.png',
+            'static/stringsight_visualizations/traj_0/image_4.png',
+            'static/stringsight_visualizations/traj_0/image_5.png',
+            'static/stringsight_visualizations/traj_0/image_6.png'
+        ];
+        
+        let currentIndex = 0;
+        const imgElement = document.getElementById('stringsightImage');
+        const stepCounter = document.getElementById('stepCounter');
+        
+        if (imgElement && stepCounter) {
+            function updateImage() {
+                // Fade out
+                imgElement.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // Change image
+                    imgElement.src = images[currentIndex];
+                    stepCounter.textContent = (currentIndex + 1);
+                    currentIndex = (currentIndex + 1) % images.length;
+                    
+                    // Fade in
+                    imgElement.style.opacity = '1';
+                }, 250);
+            }
+            
+            // Auto-rotate every 1.5 seconds to show the looping behavior
+            setInterval(updateImage, 1500);
+        }
+    })();
+</script>
+
 <section class="w-full py-20 bg-gray-50 border-t border-gray-200">
     <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row-reverse items-center gap-12">
-        <div class="w-full md:w-3/5 shadow-2xl rounded-xl overflow-hidden border border-gray-200 relative">
-            <div class="aspect-video bg-gray-200 relative flex items-center justify-center">
-                <img src="assets/failures/maze_fail.gif" class="w-full h-full object-cover" alt="Maze Crash" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-600" style="display: none;">
-                    <p class="text-sm">GIF: Agent (blue dot) repeatedly hitting the same wall</p>
-                </div>
-                <div class="absolute top-1/3 bg-white px-4 py-2 rounded-lg shadow-xl border-l-4 border-red-500 flex items-center gap-3 animate-bounce">
-                    <span class="text-2xl">🚫</span>
-                    <div>
-                        <div class="text-xs text-gray-400 font-bold uppercase">System Feedback</div>
-                        <div class="text-sm font-bold text-red-600">Cannot move into a wall.</div>
-                    </div>
+        <div class="w-full md:w-3/5 shadow-2xl rounded-xl overflow-hidden border border-gray-200 relative bg-black">
+            <div class="aspect-video bg-gray-800 relative opacity-90" id="stringsightCarousel2">
+                <!-- StringSight traj_1 images will be displayed here -->
+                <img id="stringsightImage2" src="static/stringsight_visualizations/traj_1/image_0.png" class="transition-opacity duration-500" alt="StringSight State Mismanagement" style="display: block; width: 100%; height: 100%; object-fit: contain;">
+                <div class="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-sm p-3 rounded text-xs font-mono text-green-400 border border-gray-700 shadow-lg">
+                    <div class="text-xs text-gray-400 mb-1">Step: <span id="stepCounter2">1</span> / 14</div>
+                    <div class="opacity-50">> Action: ('rotate', [0.0, 60.0, 0.0])</div>
+                    <div class="opacity-75">> Action: ('rotate', [0.0, 60.0, 0.0])</div>
+                    <div class="font-bold text-white">> Action: ('rotate', [0.0, 60.0, 0.0]) <span class="animate-pulse">_</span></div>
                 </div>
             </div>
         </div>
         <div class="w-full md:w-2/5 space-y-6">
             <div class="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-bold tracking-wide">
-                FAILURE MODE 02
+                State Mismanagement
             </div>
-            <h3 class="text-3xl font-bold berkeley-blue">State Mismanagement</h3>
+            <h3 class="text-3xl font-bold berkeley-blue">The "Stubborn Explorer"</h3>
             <p class="text-lg text-gray-600 leading-relaxed">
                 Without explicit state tracking, models act like they have amnesia. 
-                [cite_start]Here, <span class="font-bold">Claude Sonnet 4</span> ignores the explicit "Cannot move into a wall" feedback and tries to walk through the same wall in the very next step [cite: 1149-1151].
+                [cite_start]Here, the model misjudges the effect of its rotations, applying large corrections that result in the object being further from the target orientation, indicating it is not fully utilizing the visual feedback provided after each step [cite: 1149-1151].
             </p>
             <div class="border-l-4 border-orange-500 pl-4 py-1">
                 <p class="text-sm italic text-gray-500">
@@ -102,30 +160,75 @@
     </div>
 </section>
 
+<script>
+    // StringSight traj_1 image carousel for State Mismanagement demonstration
+    (function() {
+        const images2 = [
+            'static/stringsight_visualizations/traj_1/image_0.png',
+            'static/stringsight_visualizations/traj_1/image_1.png',
+            'static/stringsight_visualizations/traj_1/image_2.png',
+            'static/stringsight_visualizations/traj_1/image_3.png',
+            'static/stringsight_visualizations/traj_1/image_4.png',
+            'static/stringsight_visualizations/traj_1/image_5.png',
+            'static/stringsight_visualizations/traj_1/image_6.png',
+            'static/stringsight_visualizations/traj_1/image_7.png',
+            'static/stringsight_visualizations/traj_1/image_8.png',
+            'static/stringsight_visualizations/traj_1/image_9.png',
+            'static/stringsight_visualizations/traj_1/image_10.png',
+            'static/stringsight_visualizations/traj_1/image_11.png',
+            'static/stringsight_visualizations/traj_1/image_12.png',
+            'static/stringsight_visualizations/traj_1/image_13.png'
+        ];
+        
+        let currentIndex2 = 0;
+        const imgElement2 = document.getElementById('stringsightImage2');
+        const stepCounter2 = document.getElementById('stepCounter2');
+        
+        if (imgElement2 && stepCounter2) {
+            function updateImage2() {
+                // Fade out
+                imgElement2.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // Change image
+                    imgElement2.src = images2[currentIndex2];
+                    stepCounter2.textContent = (currentIndex2 + 1);
+                    currentIndex2 = (currentIndex2 + 1) % images2.length;
+                    
+                    // Fade in
+                    imgElement2.style.opacity = '1';
+                }, 250);
+            }
+            
+            // Auto-rotate every 1.5 seconds to show the state mismanagement behavior
+            setInterval(updateImage2, 1500);
+        }
+    })();
+</script>
+
 <section class="w-full py-20 border-t border-gray-200">
     <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
-        <div class="w-full md:w-3/5 shadow-2xl rounded-xl overflow-hidden border border-gray-200 relative bg-white">
-            <div class="aspect-video relative flex flex-col items-center justify-center bg-slate-100">
-                <img src="assets/failures/matchstick_quit.gif" class="w-full h-full object-cover opacity-50" alt="Matchstick Giveup" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="w-full h-full bg-slate-100 flex items-center justify-center text-gray-600" style="display: none;">
-                    <p class="text-sm">GIF: Matchstick equation with incorrect moves</p>
-                </div>
-                <div class="absolute inset-0 flex items-center justify-center bg-black/10">
-                    <div class="bg-white/95 backdrop-blur px-8 py-6 rounded-xl shadow-2xl max-w-md text-center border border-gray-200">
-                        <p class="font-serif text-xl italic text-gray-800 mb-2">"Twelve illegal moves. I give up. This is unsolvable."</p>
-                        <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">— Gemma 3 Output</div>
-                    </div>
+        <div class="w-full md:w-3/5 shadow-2xl rounded-xl overflow-hidden border border-gray-200 relative bg-black">
+            <div class="aspect-video bg-gray-800 relative opacity-90" id="stringsightCarousel3">
+                <!-- StringSight traj_2 images will be displayed here -->
+                <img id="stringsightImage3" src="static/stringsight_visualizations/traj_2/image_0.png" class="transition-opacity duration-500" alt="StringSight Early Termination" style="display: block; width: 100%; height: 100%; object-fit: contain;">
+                <div class="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-sm p-3 rounded text-xs font-mono text-green-400 border border-gray-700 shadow-lg">
+                    <div class="text-xs text-gray-400 mb-1">Step: <span id="stepCounter3">1</span> / 20</div>
+                    <div class="opacity-50">> Action: ('move', 2)</div>
+                    <div class="opacity-75">> Action: ('move', 2)</div>
+                    <div class="font-bold text-white">> Action: ('move', 2) <span class="animate-pulse">_</span></div>
+                    <div class="text-xs text-red-400 mt-2">⚠ Cannot move into a wall.</div>
                 </div>
             </div>
         </div>
         <div class="w-full md:w-2/5 space-y-6">
             <div class="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-bold tracking-wide">
-                FAILURE MODE 03
+                Early Termination
             </div>
-            <h3 class="text-3xl font-bold berkeley-blue">Early Termination</h3>
+            <h3 class="text-3xl font-bold berkeley-blue">The "Rage Quitter"</h3>
             <p class="text-lg text-gray-600 leading-relaxed">
                 Perception errors lead to false confidence. 
-                [cite_start]In <span class="font-bold">Matchstick Equation</span>, the model hallucinates that the puzzle is impossible after a few failed tries and quits early, even though many steps remain[cite: 1152].
+                [cite_start]The model revisits previously blocked directions and fails to remember which moves have already been proven impossible, leading to repeated failed actions instead of seeking new routes [cite: 1152].
             </p>
             <div class="border-l-4 border-purple-500 pl-4 py-1">
                 <p class="text-sm italic text-gray-500">
@@ -136,31 +239,81 @@
     </div>
 </section>
 
+<script>
+    // StringSight traj_2 image carousel for Early Termination demonstration
+    (function() {
+        const images3 = [
+            'static/stringsight_visualizations/traj_2/image_0.png',
+            'static/stringsight_visualizations/traj_2/image_1.png',
+            'static/stringsight_visualizations/traj_2/image_2.png',
+            'static/stringsight_visualizations/traj_2/image_3.png',
+            'static/stringsight_visualizations/traj_2/image_4.png',
+            'static/stringsight_visualizations/traj_2/image_5.png',
+            'static/stringsight_visualizations/traj_2/image_6.png',
+            'static/stringsight_visualizations/traj_2/image_7.png',
+            'static/stringsight_visualizations/traj_2/image_8.png',
+            'static/stringsight_visualizations/traj_2/image_9.png',
+            'static/stringsight_visualizations/traj_2/image_10.png',
+            'static/stringsight_visualizations/traj_2/image_11.png',
+            'static/stringsight_visualizations/traj_2/image_12.png',
+            'static/stringsight_visualizations/traj_2/image_13.png',
+            'static/stringsight_visualizations/traj_2/image_14.png',
+            'static/stringsight_visualizations/traj_2/image_15.png',
+            'static/stringsight_visualizations/traj_2/image_16.png',
+            'static/stringsight_visualizations/traj_2/image_17.png',
+            'static/stringsight_visualizations/traj_2/image_18.png',
+            'static/stringsight_visualizations/traj_2/image_19.png'
+        ];
+        
+        let currentIndex3 = 0;
+        const imgElement3 = document.getElementById('stringsightImage3');
+        const stepCounter3 = document.getElementById('stepCounter3');
+        
+        if (imgElement3 && stepCounter3) {
+            function updateImage3() {
+                // Fade out
+                imgElement3.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // Change image
+                    imgElement3.src = images3[currentIndex3];
+                    stepCounter3.textContent = (currentIndex3 + 1);
+                    currentIndex3 = (currentIndex3 + 1) % images3.length;
+                    
+                    // Fade in
+                    imgElement3.style.opacity = '1';
+                }, 250);
+            }
+            
+            // Auto-rotate every 1.5 seconds to show the early termination behavior
+            setInterval(updateImage3, 1500);
+        }
+    })();
+</script>
+
 <section class="w-full py-20 bg-gray-50 border-t border-gray-200">
     <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row-reverse items-center gap-12">
-        <div class="w-full md:w-3/5 shadow-2xl rounded-xl overflow-hidden border border-gray-200 relative">
-            <div class="aspect-video bg-black grid grid-cols-2 gap-1 p-1">
-                <div class="relative h-full bg-gray-900 flex items-center justify-center border border-gray-700">
-                    <span class="absolute top-2 left-2 text-xs text-white bg-green-600 px-2 py-0.5 rounded">Target</span>
-                    <img src="assets/failures/rotation_target.png" class="w-2/3 opacity-80" alt="Target Rotation" onerror="this.style.display='none'; this.parentElement.innerHTML='<p class=\'text-white text-sm\'>Target orientation</p>';">
-                </div>
-                <div class="relative h-full bg-gray-900 flex items-center justify-center border border-gray-700">
-                    <span class="absolute top-2 left-2 text-xs text-white bg-red-600 px-2 py-0.5 rounded">Current State</span>
-                    <img src="assets/failures/rotation_fail.gif" class="w-2/3" alt="Failed Rotation" onerror="this.style.display='none'; this.parentElement.innerHTML='<p class=\'text-white text-sm\'>Wrong rotation direction</p>';">
-                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <svg class="w-24 h-24 text-red-500 animate-spin-slow opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    </div>
+        <div class="w-full md:w-3/5 shadow-2xl rounded-xl overflow-hidden border border-gray-200 relative bg-black">
+            <div class="aspect-video bg-gray-800 relative opacity-90" id="stringsightCarousel4">
+                <!-- StringSight traj_3 images will be displayed here -->
+                <img id="stringsightImage4" src="static/stringsight_visualizations/traj_3/image_0.png" class="transition-opacity duration-500" alt="StringSight Visual Misjudgment" style="display: block; width: 100%; height: 100%; object-fit: contain;">
+                <div class="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-sm p-3 rounded text-xs font-mono text-green-400 border border-gray-700 shadow-lg">
+                    <div class="text-xs text-gray-400 mb-1">Step: <span id="stepCounter4">1</span> / 13</div>
+                    <div class="opacity-50">> Action: ('move', [0, 0, 2, 0])</div>
+                    <div class="opacity-75">> Action: ('move', [0, 0, 2, 0])</div>
+                    <div class="font-bold text-white">> Action: ('move', [0, 0, 2, 0]) <span class="animate-pulse">_</span></div>
+                    <div class="text-xs text-yellow-400 mt-2 italic">"I give up."</div>
                 </div>
             </div>
         </div>
         <div class="w-full md:w-2/5 space-y-6">
             <div class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-bold tracking-wide">
-                FAILURE MODE 04
+                Visual Misjudgment
             </div>
-            <h3 class="text-3xl font-bold berkeley-blue">Visual Misjudgment</h3>
+            <h3 class="text-3xl font-bold berkeley-blue">"Optimistic Rotator"</h3>
             <p class="text-lg text-gray-600 leading-relaxed">
-                The target is right there, but <span class="font-bold">Gemini 2.5 Pro</span> misinterprets the spatial orientation. 
-                [cite_start]It repeatedly rotates the object in the <i>wrong direction</i>, drifting further away from the goal despite visual feedback [cite: 1154-1155].
+                After a long sequence of failed moves, the model explicitly gives up and submits the equation as final, stating 'I give up.'
+                [cite_start]The model misinterprets the visual feedback and repeatedly makes incorrect moves, eventually giving up despite the task being solvable [cite: 1154-1155].
             </p>
             <div class="border-l-4 border-green-500 pl-4 py-1">
                 <p class="text-sm italic text-gray-500">
@@ -170,6 +323,51 @@
         </div>
     </div>
 </section>
+
+<script>
+    // StringSight traj_3 image carousel for Visual Misjudgment demonstration
+    (function() {
+        const images4 = [
+            'static/stringsight_visualizations/traj_3/image_0.png',
+            'static/stringsight_visualizations/traj_3/image_1.png',
+            'static/stringsight_visualizations/traj_3/image_2.png',
+            'static/stringsight_visualizations/traj_3/image_3.png',
+            'static/stringsight_visualizations/traj_3/image_4.png',
+            'static/stringsight_visualizations/traj_3/image_5.png',
+            'static/stringsight_visualizations/traj_3/image_6.png',
+            'static/stringsight_visualizations/traj_3/image_7.png',
+            'static/stringsight_visualizations/traj_3/image_8.png',
+            'static/stringsight_visualizations/traj_3/image_9.png',
+            'static/stringsight_visualizations/traj_3/image_10.png',
+            'static/stringsight_visualizations/traj_3/image_11.png',
+            'static/stringsight_visualizations/traj_3/image_12.png'
+        ];
+        
+        let currentIndex4 = 0;
+        const imgElement4 = document.getElementById('stringsightImage4');
+        const stepCounter4 = document.getElementById('stepCounter4');
+        
+        if (imgElement4 && stepCounter4) {
+            function updateImage4() {
+                // Fade out
+                imgElement4.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // Change image
+                    imgElement4.src = images4[currentIndex4];
+                    stepCounter4.textContent = (currentIndex4 + 1);
+                    currentIndex4 = (currentIndex4 + 1) % images4.length;
+                    
+                    // Fade in
+                    imgElement4.style.opacity = '1';
+                }, 250);
+            }
+            
+            // Auto-rotate every 1.5 seconds to show the visual misjudgment behavior
+            setInterval(updateImage4, 1500);
+        }
+    })();
+</script>
 </body>
 </html>
 

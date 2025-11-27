@@ -1,0 +1,5 @@
+Twelve illegal moves. I give up. I suspect the segment definitions or move validation is broken. I will submit a nonsense move.
+
+```
+('stop', 'stop')
+```

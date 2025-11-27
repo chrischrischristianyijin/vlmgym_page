@@ -1,0 +1,7 @@
+Alright, four illegal moves. It appears I'm consistently misjudging valid moves based on the visual representation. Let's try a different strategy. Let's attempt to make the equation 1 + 1 = 2.
+
+I will move a match from '0' (currently looking like a zero) to '1' (currently looking like a one) to make it a '1'.
+
+```
+('move', [0, 0, 1, 0])
+```

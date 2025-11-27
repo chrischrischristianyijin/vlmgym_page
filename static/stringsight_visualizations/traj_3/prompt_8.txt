@@ -1,0 +1,3 @@
+Environment feedback: Illegal move.
+
+This is step 9. You are allowed to take 21 more steps.

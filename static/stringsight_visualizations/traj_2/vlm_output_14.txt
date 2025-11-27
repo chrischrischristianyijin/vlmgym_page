@@ -1,0 +1,3 @@
+I can't move down anymore because there's a wall. Let me try moving up to go back and explore a different route.
+
+`('move', 1)`

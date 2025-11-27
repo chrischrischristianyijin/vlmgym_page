@@ -1,0 +1,7 @@
+Okay, two illegal moves in a row. Let's analyze the situation carefully. We want to transform the initial state into a valid equation. The current symbols are messy. Let's try to get something like 1 + 0 = 1.
+
+I will try moving a match from '1' (currently looking like a '1') to '2' making it a '0'. Then, I'll move a match from '3' to '0' to create a '1'.
+
+```
+('move', [1, 0, 2, 0])
+```

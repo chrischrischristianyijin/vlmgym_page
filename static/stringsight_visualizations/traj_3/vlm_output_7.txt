@@ -1,0 +1,5 @@
+Okay, no moves to undo. Let's try to make '4' into '5'. I will attempt to move a match from '0' to '4'.
+
+```
+('move', [0, 0, 4, 0])
+```

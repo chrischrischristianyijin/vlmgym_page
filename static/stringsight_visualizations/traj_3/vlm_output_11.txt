@@ -1,0 +1,5 @@
+Eleven illegal moves and no undo history. This is extremely frustrating. I'm going to just try moving a match from a seemingly arbitrary location to another.
+
+```
+('move', [3, 0, 6, 0])
+```

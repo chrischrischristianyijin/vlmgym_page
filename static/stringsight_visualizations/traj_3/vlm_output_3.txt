@@ -1,0 +1,7 @@
+Okay, three illegal moves. This is getting frustrating. Let's take a step back. Instead of focusing on 1+0=1, let's try to make something simpler, like 0 + 0 = 0.
+
+I will move a match from '1' to '0' to make it '0'.
+
+```
+('move', [1, 0, 0, 0])
+```

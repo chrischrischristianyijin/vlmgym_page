@@ -1,0 +1,5 @@
+Six illegal moves... This is incredibly frustrating. I'm clearly not understanding how the move validation works. I will attempt to undo the last move.
+
+```
+('undo', 'undo')
+```

@@ -1,0 +1,5 @@
+Ten illegal moves. This is clearly not working. I suspect the problem lies in the segment definitions and my inability to map them correctly to the visual representation. I will try undoing the last move, although there is no history.
+
+```
+('undo', 'undo')
+```

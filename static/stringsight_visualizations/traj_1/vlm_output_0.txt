@@ -1,0 +1,20 @@
+The user wants me to rotate the object on the right to match the orientation of the object on the left.
+
+**Analysis of Target Object (Left):**
+*   The object is a chain of connected blocks forming a Z-like shape.
+...
+(trimmed by author for space)
+
+**Analysis of Current Object (Right):**
+*   It's the same object, but its orientation is different.
+...
+(trimmed by author for space)
+
+**Plan:**
+1.  My first step will be to correct the most obvious distortion, which is the pitch. The object is tilted away from the camera, making it look foreshortened. 
+...
+(trimmed by author for space)
+
+**Action:**
+I will apply a positive pitch of 60 degrees.
+`('rotate', [0.0, 60.0, 0.0])`

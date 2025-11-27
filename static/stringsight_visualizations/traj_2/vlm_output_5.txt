@@ -1,0 +1,3 @@
+Perfect! I've moved up again and I can see that I'm now at a position where there appears to be a horizontal white path available to my left. This should allow me to start moving toward the red target. Let me try moving left now.
+
+`('move', 2)`

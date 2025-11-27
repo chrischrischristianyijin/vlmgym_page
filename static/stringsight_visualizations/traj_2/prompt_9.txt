@@ -1,0 +1,3 @@
+Environment feedback: Cannot move into a wall.
+
+This is step 10. You are allowed to take 10 more steps.

@@ -1,0 +1,5 @@
+Nine illegal moves. I am at a complete loss. Since every attempt is failing, I'm going to try a completely random move to see if the system provides any clue about what's going wrong. 
+
+```
+('move', [2, 0, 5, 0])
+```

@@ -210,12 +210,12 @@ body {
 
 /* Left Panel: Information Console */
 .hero-left-panel {
-  flex: 1 1 50%; /* At least 50% for text, can grow */
+  flex: 1 1 50%; /* Balanced 50/50 layout */
   min-width: 0; /* Allow flex shrinking */
   display: flex;
   align-items: flex-start; /* Align to top to match image */
   justify-content: flex-start;
-  padding: 50px 20px 50px 20px; /* Added: 10px→20px left/right for slight margin */
+  padding: 50px 20px 50px 20px;
   background-color: #f5f5f7;
 }
 
@@ -234,12 +234,12 @@ body {
 
 /* Right Panel: Visual Window */
 .hero-right-panel {
-  flex: 1 1 50%; /* Equal space, can grow */
+  flex: 1 1 50%; /* Balanced 50/50 layout */
   min-width: 0; /* Allow flex shrinking */
   display: flex;
   align-items: flex-start; /* Align to top to match authors */
   justify-content: center;
-  padding: 50px 20px; /* Added: 10px→20px horizontal for slight margin */
+  padding: 50px 20px;
   background-color: #f5f5f7;
   position: relative;
   overflow: hidden;
@@ -259,7 +259,8 @@ body {
 .apple-teaser-image {
   width: 100%;
   height: auto;
-  max-height: 90vh;
+  max-height: 85vh;
+  max-width: 100%;
   object-fit: contain;
   border-radius: 0;
   box-shadow: none;

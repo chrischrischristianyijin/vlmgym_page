@@ -1,0 +1,3 @@
+Excellent! I've moved up again and I'm getting closer to the top of the maze. I can see that I'm still in the vertical white path on the right side. I need to continue moving up to reach a point where I can turn left and start moving toward the red target in the top left corner.
+
+`('move', 1)`

@@ -1,0 +1,7 @@
+Five illegal moves! Okay, I'm clearly having trouble visualizing the valid moves. I need to be more conservative. Let's try to change the equals sign to a plus sign.
+
+I will move a match from '6' (the horizontal bar of the equals sign) to '7' (the vertical bar of the equals sign).
+
+```
+('move', [6, 0, 7, 0])
+```

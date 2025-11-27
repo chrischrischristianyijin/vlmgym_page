@@ -1,0 +1,3 @@
+Environment feedback: Illegal move.
+
+This is step 3. You are allowed to take 27 more steps.

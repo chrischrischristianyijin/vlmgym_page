@@ -1,0 +1,1 @@
+The model repeatedly issues the same swap command between the same two pieces without making any progress towards solving the puzzle, as evidenced by identical actions over multiple consecutive steps.

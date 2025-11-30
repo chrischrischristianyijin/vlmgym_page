@@ -23,11 +23,8 @@
     </style>
 </head>
 <body class="bg-white">
-<div class="max-w-4xl mx-auto text-center py-20">
-    <h2 class="text-4xl font-extrabold berkeley-blue mb-6">Deep Insights & Discoveries</h2>
-    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-        VisGym allows us to isolate variables and uncover <i>why</i> multimodal agents fail, and <i>how</i> to fix them.
-    </p>
+<div class="max-w-6xl mx-auto px-4 py-8">
+    <h2 class="text-2xl font-bold berkeley-blue mb-4">Quantitative Insights (Why Models Fail)</h2>
 </div>
 
 <section class="w-full py-16 bg-gray-50 border-y border-gray-200">
@@ -62,7 +59,6 @@
 
             <div class="w-full md:w-1/2 space-y-6">
                 <div class="flex items-center gap-3">
-                    <span class="text-4xl">🤯</span>
                     <h3 class="text-2xl font-bold berkeley-blue">The Visual Grounding Paradox</h3>
                 </div>
                 <p class="text-lg text-gray-700 leading-relaxed">
@@ -87,7 +83,6 @@
 
             <div class="w-full md:w-1/2 space-y-6">
                 <div class="flex items-center gap-3">
-                    <span class="text-4xl">🧠</span>
                     <h3 class="text-2xl font-bold berkeley-blue">The Reasoning Bottleneck</h3>
                 </div>
                 <p class="text-lg text-gray-700 leading-relaxed">
@@ -107,72 +102,53 @@
 <section class="w-full py-20 bg-gray-900 text-white">
     <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-12">
-            <div class="flex justify-center gap-3 mb-4 text-4xl">💡</div>
             <h3 class="text-3xl font-bold text-white mb-4">Teaching Agents to "Look Before Leaping"</h3>
         </div>
 
         <!-- Core Thesis -->
         <div class="mb-12">
-            <h4 class="text-2xl font-bold text-white mb-4">Core Thesis</h4>
-            <p class="text-gray-300 text-lg leading-relaxed mb-4">
-                We found that standard supervised imitation learning data is insufficient.
+            <p class="text-gray-300 text-2xl leading-relaxed mb-4">
+                Standard imitation learning provides optimal paths—but not the exploratory behaviors required to understand hidden state.
             </p>
-            <ol class="list-decimal list-inside space-y-2 text-gray-300 text-lg">
-                <li>Models require learning not just the optimal path, but how to explore the environment</li>
-                <li>This work aims to verify the value of inducing information-revealing behaviors during fine-tuning</li>
-            </ol>
         </div>
 
         <!-- Comparative Experiment -->
         <div class="mb-12">
-            <h4 class="text-2xl font-bold text-white mb-4">Comparative Experiment: Matchstick Rotation Analysis</h4>
-            <p class="text-gray-300 text-lg leading-relaxed mb-6">
-                This analysis compares two demonstration strategies in the Matchstick Rotation task, which features unknown environment scale and dynamics.
-            </p>
-
             <!-- Comparison Table -->
             <div class="overflow-x-auto mb-8">
                 <table class="w-full border-collapse bg-gray-800 rounded-lg overflow-hidden">
                     <thead>
                         <tr class="bg-gray-700">
                             <th class="px-4 py-3 text-left text-white font-bold">Comparison Dimension</th>
-                            <th class="px-4 py-3 text-center text-red-400 font-bold">❌ Baseline Demonstrations (Stochastic)</th>
-                            <th class="px-4 py-3 text-center text-green-400 font-bold">✅ Information-Revealing (Structured)</th>
+                            <th class="px-4 py-3 text-center text-red-400 font-bold"> Baseline Demonstrations (Stochastic)</th>
+                            <th class="px-4 py-3 text-center text-green-400 font-bold"> Information-Revealing (Structured)</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-300">
                         <tr class="border-t border-gray-700">
                             <td class="px-4 py-3 font-semibold">Strategy</td>
-                            <td class="px-4 py-3 text-center">Baseline trajectories perform three stochastic moves toward the target<sup>4</sup>.</td>
-                            <td class="px-4 py-3 text-center">The model first performs two unit-scale steps<sup>5</sup>.</td>
+                            <td class="px-4 py-3 text-center">Three stochastic moves toward the target</td>
+                            <td class="px-4 py-3 text-center">Two unit-scale steps to probe action–perception correspondence</td>
                         </tr>
                         <tr class="border-t border-gray-700 bg-gray-800/50">
                             <td class="px-4 py-3 font-semibold">Intrinsic Goal</td>
-                            <td class="px-4 py-3 text-center">To reach the target position quickly.</td>
-                            <td class="px-4 py-3 text-center">To expose the correspondence between action magnitude and perceptual effect<sup>6</sup>.</td>
+                            <td class="px-4 py-3 text-center">Reach the target quickly</td>
+                            <td class="px-4 py-3 text-center">Expose environment scale and dynamics</td>
                         </tr>
                         <tr class="border-t border-gray-700 bg-gray-800/50">
                             <td class="px-4 py-3 font-semibold">Final Result</td>
-                            <td class="px-4 py-3 text-center text-red-400 font-bold text-xl">32.9% Success Rate<sup>8</sup></td>
-                            <td class="px-4 py-3 text-center text-green-400 font-bold text-xl">70.0% Success Rate (over 2x increase)<sup>9</sup></td>
+                            <td class="px-4 py-3 text-center text-red-400 font-bold text-xl">32.9% Success Rate</td>
+                            <td class="px-4 py-3 text-center text-green-400 font-bold text-xl">70.0% Success Rate (2× improvement)</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Rigorous Validation -->
-        <div class="mb-8">
-            <h4 class="text-2xl font-bold text-white mb-4">Rigorous Validation (Mental Rotation 3D)</h4>
-            <p class="text-gray-300 text-lg leading-relaxed mb-4">
-                The study further demonstrated that gains are not simply due to longer trajectories<sup>10</sup>. When continued training was performed on baseline demonstrations after the model was fine-tuned with information-revealing data, performance deteriorated<sup>11</sup>.
-            </p>
-        </div>
-
         <!-- Final Insight -->
         <div class="mt-8 p-4 border-l-4 border-green-600 bg-green-50 rounded-lg">
-            <p class="text-sm font-medium text-green-900">
-                <strong>Final Insight:</strong> The observed improvements stem from the informative structure of the demonstrations rather than quantity or length<sup>12</sup>. This confirms that inducing state-disambiguating behaviors is essential for effective supervised fine-tuning<sup>13</sup>.
+            <p class="text-lg font-medium text-green-900">
+                <strong>Final Insight:</strong> Structured demonstrations—not trajectory length or quantity—drive these gains. Teaching agents to disambiguate hidden state is essential for effective supervised fine-tuning.
             </p>
         </div>
     </div>

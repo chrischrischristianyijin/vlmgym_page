@@ -39,6 +39,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 100%;
+            height: 100%;
+            min-height: 200px;
+        }
+        
+        #stringsightCarousel img,
+        #stringsightCarousel2 img,
+        #stringsightCarousel3 img,
+        #stringsightCarousel4 img {
+            position: absolute;
+            top: 0;
+            left: 0;
         }
         /* Use better scaling algorithm when available */
         @supports (image-rendering: auto) {
@@ -49,17 +61,14 @@
     </style>
 </head>
 <body class="bg-white text-gray-800">
-<div class="max-w-4xl mx-auto text-center py-16 px-4">
-    <h2 class="text-4xl font-extrabold berkeley-blue mb-4">Qualitative Failure Analysis</h2>
-    <p class="text-xl text-gray-600">
-        Despite high aggregate scores, frontier models exhibit distinct, recurring breakdown patterns when analyzed qualitatively.
-    </p>
+<div class="max-w-6xl mx-auto px-4 py-8">
+    <h2 class="text-2xl font-bold berkeley-blue mb-4">Qualitative Failure Modes (How They Fail)</h2>
 </div>
 
 <section class="w-full py-20 border-t border-gray-100">
     <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
         <div class="w-full md:w-3/5 shadow-2xl rounded-xl overflow-hidden border border-gray-200 relative bg-black">
-            <div class="aspect-video bg-gray-800 relative opacity-90" id="stringsightCarousel">
+            <div class="bg-gray-800 relative opacity-90" id="stringsightCarousel">
                 <!-- StringSight images will be displayed here -->
                 <img id="stringsightImage" src="static/stringsight_visualizations/traj_0/image_0.png" class="transition-opacity duration-500" alt="StringSight Action Looping" style="display: block; width: 100%; height: 100%; object-fit: contain;">
                 <div class="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-sm p-3 rounded text-xs font-mono text-green-400 border border-gray-700 shadow-lg">
@@ -81,7 +90,7 @@
                 [cite_start]In this <span class="font-bold">StringSight</span> task, the model repeatedly swaps the same two pieces endlessly, failing to update its strategy despite zero visual progress [cite: 1147-1148].
             </p>
             <div class="border-l-4 border-blue-600 pl-4 py-1">
-                <p class="text-sm italic text-gray-500">
+                <p class="text-lg italic text-gray-500">
                     "Why do models fail with long context? They get stuck in Action Loops, repeating the same mistake despite new observations."
                 </p>
             </div>
@@ -107,6 +116,27 @@
         const stepCounter = document.getElementById('stepCounter');
         
         if (imgElement && stepCounter) {
+            const carousel = document.getElementById('stringsightCarousel');
+            
+            function adjustContainerSize() {
+                if (imgElement.naturalWidth && imgElement.naturalHeight) {
+                    const maxWidth = carousel.parentElement.offsetWidth;
+                    const aspectRatio = imgElement.naturalWidth / imgElement.naturalHeight;
+                    const maxHeight = maxWidth / aspectRatio;
+                    carousel.style.width = '100%';
+                    carousel.style.height = maxHeight + 'px';
+                }
+            }
+            
+            imgElement.onload = function() {
+                adjustContainerSize();
+            };
+            
+            // Adjust size on first load
+            if (imgElement.complete) {
+                adjustContainerSize();
+            }
+            
             function updateImage() {
                 // Fade out
                 imgElement.style.opacity = '0';
@@ -131,7 +161,7 @@
 <section class="w-full py-20 bg-gray-50 border-t border-gray-200">
     <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row-reverse items-center gap-12">
         <div class="w-full md:w-3/5 shadow-2xl rounded-xl overflow-hidden border border-gray-200 relative bg-black">
-            <div class="aspect-video bg-gray-800 relative opacity-90" id="stringsightCarousel2">
+            <div class="bg-gray-800 relative opacity-90" id="stringsightCarousel2">
                 <!-- StringSight traj_1 images will be displayed here -->
                 <img id="stringsightImage2" src="static/stringsight_visualizations/traj_1/image_0.png" class="transition-opacity duration-500" alt="StringSight State Mismanagement" style="display: block; width: 100%; height: 100%; object-fit: contain;">
                 <div class="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-sm p-3 rounded text-xs font-mono text-green-400 border border-gray-700 shadow-lg">
@@ -152,7 +182,7 @@
                 [cite_start]Here, the model misjudges the effect of its rotations, applying large corrections that result in the object being further from the target orientation, indicating it is not fully utilizing the visual feedback provided after each step [cite: 1149-1151].
             </p>
             <div class="border-l-4 border-orange-500 pl-4 py-1">
-                <p class="text-sm italic text-gray-500">
+                <p class="text-lg italic text-gray-500">
                     "Without explicit state tracking, models suffer from State Mismanagement, ignoring critical environmental feedback."
                 </p>
             </div>
@@ -185,6 +215,27 @@
         const stepCounter2 = document.getElementById('stepCounter2');
         
         if (imgElement2 && stepCounter2) {
+            const carousel2 = document.getElementById('stringsightCarousel2');
+            
+            function adjustContainerSize2() {
+                if (imgElement2.naturalWidth && imgElement2.naturalHeight) {
+                    const maxWidth = carousel2.parentElement.offsetWidth;
+                    const aspectRatio = imgElement2.naturalWidth / imgElement2.naturalHeight;
+                    const maxHeight = maxWidth / aspectRatio;
+                    carousel2.style.width = '100%';
+                    carousel2.style.height = maxHeight + 'px';
+                }
+            }
+            
+            imgElement2.onload = function() {
+                adjustContainerSize2();
+            };
+            
+            // Adjust size on first load
+            if (imgElement2.complete) {
+                adjustContainerSize2();
+            }
+            
             function updateImage2() {
                 // Fade out
                 imgElement2.style.opacity = '0';
@@ -209,7 +260,7 @@
 <section class="w-full py-20 border-t border-gray-200">
     <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
         <div class="w-full md:w-3/5 shadow-2xl rounded-xl overflow-hidden border border-gray-200 relative bg-black">
-            <div class="aspect-video bg-gray-800 relative opacity-90" id="stringsightCarousel3">
+            <div class="bg-gray-800 relative opacity-90" id="stringsightCarousel3">
                 <!-- StringSight traj_2 images will be displayed here -->
                 <img id="stringsightImage3" src="static/stringsight_visualizations/traj_2/image_0.png" class="transition-opacity duration-500" alt="StringSight Early Termination" style="display: block; width: 100%; height: 100%; object-fit: contain;">
                 <div class="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-sm p-3 rounded text-xs font-mono text-green-400 border border-gray-700 shadow-lg">
@@ -231,7 +282,7 @@
                 [cite_start]The model revisits previously blocked directions and fails to remember which moves have already been proven impossible, leading to repeated failed actions instead of seeking new routes [cite: 1152].
             </p>
             <div class="border-l-4 border-purple-500 pl-4 py-1">
-                <p class="text-sm italic text-gray-500">
+                <p class="text-lg italic text-gray-500">
                     "Models often hallucinate that a task is unsolvable and trigger Early Termination."
                 </p>
             </div>
@@ -270,6 +321,27 @@
         const stepCounter3 = document.getElementById('stepCounter3');
         
         if (imgElement3 && stepCounter3) {
+            const carousel3 = document.getElementById('stringsightCarousel3');
+            
+            function adjustContainerSize3() {
+                if (imgElement3.naturalWidth && imgElement3.naturalHeight) {
+                    const maxWidth = carousel3.parentElement.offsetWidth;
+                    const aspectRatio = imgElement3.naturalWidth / imgElement3.naturalHeight;
+                    const maxHeight = maxWidth / aspectRatio;
+                    carousel3.style.width = '100%';
+                    carousel3.style.height = maxHeight + 'px';
+                }
+            }
+            
+            imgElement3.onload = function() {
+                adjustContainerSize3();
+            };
+            
+            // Adjust size on first load
+            if (imgElement3.complete) {
+                adjustContainerSize3();
+            }
+            
             function updateImage3() {
                 // Fade out
                 imgElement3.style.opacity = '0';
@@ -294,7 +366,7 @@
 <section class="w-full py-20 bg-gray-50 border-t border-gray-200">
     <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row-reverse items-center gap-12">
         <div class="w-full md:w-3/5 shadow-2xl rounded-xl overflow-hidden border border-gray-200 relative bg-black">
-            <div class="aspect-video bg-gray-800 relative opacity-90" id="stringsightCarousel4">
+            <div class="bg-gray-800 relative opacity-90" id="stringsightCarousel4">
                 <!-- StringSight traj_3 images will be displayed here -->
                 <img id="stringsightImage4" src="static/stringsight_visualizations/traj_3/image_0.png" class="transition-opacity duration-500" alt="StringSight Visual Misjudgment" style="display: block; width: 100%; height: 100%; object-fit: contain;">
                 <div class="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-sm p-3 rounded text-xs font-mono text-green-400 border border-gray-700 shadow-lg">
@@ -316,7 +388,7 @@
                 [cite_start]The model misinterprets the visual feedback and repeatedly makes incorrect moves, eventually giving up despite the task being solvable [cite: 1154-1155].
             </p>
             <div class="border-l-4 border-green-500 pl-4 py-1">
-                <p class="text-sm italic text-gray-500">
+                <p class="text-lg italic text-gray-500">
                     "Confirming that Visual Perception remains a distinct bottleneck from reasoning."
                 </p>
             </div>
@@ -348,6 +420,27 @@
         const stepCounter4 = document.getElementById('stepCounter4');
         
         if (imgElement4 && stepCounter4) {
+            const carousel4 = document.getElementById('stringsightCarousel4');
+            
+            function adjustContainerSize4() {
+                if (imgElement4.naturalWidth && imgElement4.naturalHeight) {
+                    const maxWidth = carousel4.parentElement.offsetWidth;
+                    const aspectRatio = imgElement4.naturalWidth / imgElement4.naturalHeight;
+                    const maxHeight = maxWidth / aspectRatio;
+                    carousel4.style.width = '100%';
+                    carousel4.style.height = maxHeight + 'px';
+                }
+            }
+            
+            imgElement4.onload = function() {
+                adjustContainerSize4();
+            };
+            
+            // Adjust size on first load
+            if (imgElement4.complete) {
+                adjustContainerSize4();
+            }
+            
             function updateImage4() {
                 // Fade out
                 imgElement4.style.opacity = '0';

@@ -462,22 +462,141 @@
         <h3 class="radar-chart-title">Comprehensive Capability Coverage</h3>
       </div>
       <p class="radar-chart-subtitle">VisGym unifies diverse capabilities into a single, scalable framework</p>
-      <div class="radar-chart-layout">
-        <div class="radar-chart-container">
-          <div id="radarChart" class="echarts-radar"></div>
-        </div>
-        <div class="radar-chart-explanation">
-          <p class="radar-chart-explanation-text">
-            <strong>Comparison among frameworks for visually interactive decision-making.</strong>
-          </p>
-          <ul class="radar-chart-explanation-list">
-            <li><strong>Struct. Obs.</strong> and <strong>Non-struct. Obs.</strong> indicate whether visual inputs can be parsed into structured text.</li>
-            <li><strong>POMDP</strong> denotes partial observability with hidden states.</li>
-            <li><strong>Multi-Domain</strong> covers diversity across domains (e.g., robotics, computer use, games, puzzles).</li>
-            <li><strong>Scalable Episodes</strong> marks automatic, large-scale generation.</li>
-            <li><strong>SFT</strong> and <strong>Online RL</strong> show support for finetuning and reinforcement learning.</li>
-          </ul>
-        </div>
+      <div class="comparison-table-wrapper">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Framework</th>
+              <th>Struct. Obs.</th>
+              <th>Non-struct. Obs.</th>
+              <th>POMDP</th>
+              <th>Multi-Domain</th>
+              <th>Scalable Episodes</th>
+              <th>SFT</th>
+              <th>Online RL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td class="text-left"><strong>VisGym (Ours)</strong></td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+            </tr>
+            <tr class="group-header">
+              <td colspan="8">Eval & Training</td>
+            </tr>
+            <tr>
+              <td class="text-left">VLABench</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td class="text-left">VLM-Gym</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td class="text-left">KORGym</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td class="text-left">VisualAgentBench</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td class="text-left">VAGEN</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✓</td>
+            </tr>
+            <tr class="group-header">
+              <td colspan="8">Eval-only</td>
+            </tr>
+            <tr>
+              <td class="text-left">OSWorld</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+            </tr>
+            <tr>
+              <td class="text-left">LIBERO</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✗</td>
+            </tr>
+            <tr>
+              <td class="text-left">VideoGameBench</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+            </tr>
+            <tr>
+              <td class="text-left">LMGame-Bench</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+              <td>✗</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="radar-chart-explanation" style="margin-top: 2rem;">
+        <p class="radar-chart-explanation-text">
+          <strong>Comparison among frameworks for visually interactive decision-making.</strong>
+        </p>
+        <ul class="radar-chart-explanation-list">
+          <li><strong>Struct. Obs.</strong> and <strong>Non-struct. Obs.</strong> indicate whether visual inputs can be parsed into structured text.</li>
+          <li><strong>POMDP</strong> denotes partial observability with hidden states.</li>
+          <li><strong>Multi-Domain</strong> covers diversity across domains (e.g., robotics, computer use, games, puzzles).</li>
+          <li><strong>Scalable Episodes</strong> marks automatic, large-scale generation.</li>
+          <li><strong>SFT</strong> and <strong>Online RL</strong> show support for finetuning and reinforcement learning.</li>
+        </ul>
       </div>
     </div>
   </div>

@@ -33,25 +33,25 @@
             <div class="w-full md:w-1/2">
                 <!-- Example Selector -->
                 <div class="mb-4 flex gap-2 justify-center flex-wrap">
-                    <button onclick="selectExample(0)" id="example-btn-0" class="px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold transition-all">Sliding Block</button>
-                    <button onclick="selectExample(1)" id="example-btn-1" class="px-3 py-1 rounded-full text-gray-500 text-xs font-bold transition-all">Matchstick Equation</button>
-                    <button onclick="selectExample(2)" id="example-btn-2" class="px-3 py-1 rounded-full text-gray-500 text-xs font-bold transition-all">Maze 2D</button>
-                    <button onclick="selectExample(3)" id="example-btn-3" class="px-3 py-1 rounded-full text-gray-500 text-xs font-bold transition-all">Patch Reassembly</button>
+                    <button onclick="selectExample(0)" id="example-btn-0" class="px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold transition-all">Sliding Block</button>
+                    <button onclick="selectExample(1)" id="example-btn-1" class="px-3 py-1 rounded-full text-gray-500 text-[10px] font-bold transition-all">Matchstick Equation</button>
+                    <button onclick="selectExample(2)" id="example-btn-2" class="px-3 py-1 rounded-full text-gray-500 text-[10px] font-bold transition-all">Maze 2D</button>
+                    <button onclick="selectExample(3)" id="example-btn-3" class="px-3 py-1 rounded-full text-gray-500 text-[10px] font-bold transition-all">Patch Reassembly</button>
                 </div>
                 
                 <div id="display-container" class="bg-white p-2 rounded-2xl border border-red-500 relative overflow-hidden group transition-all duration-500" style="box-shadow: 0 0 15px rgba(239, 68, 68, 0.3), 0 0 30px rgba(239, 68, 68, 0.2), 0 0 45px rgba(239, 68, 68, 0.1);">
                     <div class="absolute top-4 left-0 right-0 flex justify-center z-20">
                         <div class="bg-white/90 backdrop-blur rounded-full p-1 border border-gray-200 shadow-sm flex items-center">
-                            <div id="btn-visual" onclick="selectVisual()" class="px-4 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold transition-all cursor-pointer hover:bg-blue-200">Visual Input</div>
-                            <div id="btn-text" onclick="selectASCII()" class="px-4 py-1 rounded-full text-gray-500 text-xs font-bold transition-all cursor-pointer hover:bg-gray-100">ASCII Input</div>
+                            <div id="btn-visual" onclick="selectVisual()" class="px-4 py-1 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold transition-all cursor-pointer hover:bg-blue-200">Visual Input</div>
+                            <div id="btn-text" onclick="selectASCII()" class="px-4 py-1 rounded-full text-gray-500 text-[10px] font-bold transition-all cursor-pointer hover:bg-gray-100">ASCII Input</div>
                         </div>
                     </div>
 
-                    <div class="relative h-80 bg-gray-100 rounded-xl flex items-center justify-center mt-10 overflow-hidden">
-                        <img id="img-layer" src="static/text_mode_compare/matchstick_equation.png" class="absolute w-3/4 transition-opacity duration-500 opacity-100" alt="Visual Input" style="object-fit: contain;">
+                    <div class="relative h-96 bg-gray-100 rounded-xl flex items-center justify-center mt-10 overflow-hidden">
+                        <img id="img-layer" src="static/text_mode_compare/matchstick_equation.png" class="absolute w-full h-full transition-opacity duration-500 opacity-100" alt="Visual Input" style="object-fit: contain; padding: 1rem;">
                         
                         <div id="ascii-layer" class="absolute w-full h-full bg-black flex items-center justify-center opacity-0 transition-opacity duration-500 overflow-auto p-4">
-                            <div id="ascii-content" class="text-green-400 text-[10px] leading-[12px] font-mono whitespace-pre-wrap flex gap-8"></div>
+                            <div id="ascii-content" class="text-green-400 text-sm leading-relaxed font-mono whitespace-pre-wrap flex gap-8"></div>
                         </div>
                     </div>
                 </div>
@@ -62,11 +62,17 @@
                     <h3 class="text-2xl font-bold berkeley-blue">The Visual Grounding Paradox</h3>
                 </div>
                 <p class="text-lg text-gray-700 leading-relaxed">
-                    [cite_start]Surprisingly, frontier models like GPT-5 perform <b>3-4x better</b> on symbolic tasks when inputs are rendered as ASCII text rather than pixels[cite: 299].
+                    Frontier VLMs such as GPT-5 achieve <b>3–4× higher accuracy</b> on symbolic tasks when the same inputs are rendered as ASCII characters rather than as images.
                 </p>
-                <p class="text-gray-600">
-                    This reveals a critical bottleneck: the limitation often isn't reasoning, but <b>visual grounding</b>. [cite_start]The model "knows" how to solve the equation, but simply cannot "see" the matchsticks correctly in the image domain [cite: 300-301].
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    This striking gap highlights a fundamental limitation: the difficulty lies <b>not in reasoning, but in seeing</b>.
                 </p>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    The model already knows how to solve the problem—it simply cannot reliably <b>perceive the matchsticks</b> when they are presented in pixel form.
+                </p>
+                <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-600 text-lg text-green-900 italic">
+                    "Visual grounding, rather than algorithmic reasoning, remains the dominant bottleneck."
+                </div>
             </div>
         </div>
     </div>
@@ -86,13 +92,16 @@
                     <h3 class="text-2xl font-bold berkeley-blue">The Reasoning Bottleneck</h3>
                 </div>
                 <p class="text-lg text-gray-700 leading-relaxed">
-                    We decoupled the architecture to ask: does performance come from better eyes (Vision Encoder) or a better brain (LLM)?
+                    We decoupled the architecture to ask a simple question: does performance come from <b>better eyes</b> (the vision encoder) or a <b>better brain</b> (the LLM)?
                 </p>
-                <p class="text-gray-600">
-                    [cite_start]Our analysis shows that for most interactive tasks (below the diagonal), <b>temporal reasoning (LLM)</b> is the dominant factor[cite: 460]. [cite_start]While visual perception is necessary, the ability to integrate history and plan over time is the true differentiator[cite: 508].
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Our analysis shows that, for most interactive tasks, <b>temporal reasoning</b> is the dominant factor.
                 </p>
-                <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-600 text-sm text-blue-900 italic">
-                    [cite_start]"Temporal reasoning and history integration remain the primary bottlenecks for current VLMs." [cite: 508]
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    While visual perception is necessary, the ability to <b>integrate history and plan over time</b> is what truly differentiates model performance.
+                </p>
+                <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-600 text-lg text-blue-900 italic">
+                    "Temporal reasoning and history integration remain the primary bottlenecks for current VLMs."
                 </div>
             </div>
         </div>
@@ -136,9 +145,9 @@
                             <td class="px-4 py-3 text-center">Expose environment scale and dynamics</td>
                         </tr>
                         <tr class="border-t border-gray-700 bg-gray-800/50">
-                            <td class="px-4 py-3 font-semibold">Final Result</td>
-                            <td class="px-4 py-3 text-center text-red-400 font-bold text-xl">32.9% Success Rate</td>
-                            <td class="px-4 py-3 text-center text-green-400 font-bold text-xl">70.0% Success Rate (2× improvement)</td>
+                            <td class="px-4 py-4 font-semibold text-lg">Success Rate</td>
+                            <td class="px-4 py-4 text-center text-red-400 font-bold text-2xl">32.9%</td>
+                            <td class="px-4 py-4 text-center text-green-400 font-bold text-2xl">70.0% (≈2.1×)</td>
                         </tr>
                     </tbody>
                 </table>
@@ -148,7 +157,7 @@
         <!-- Final Insight -->
         <div class="mt-8 p-4 border-l-4 border-green-600 bg-green-50 rounded-lg">
             <p class="text-lg font-medium text-green-900">
-                <strong>Final Insight:</strong> Structured demonstrations—not trajectory length or quantity—drive these gains. Teaching agents to disambiguate hidden state is essential for effective supervised fine-tuning.
+                Structured demonstrations, not trajectory length or quantity, drive these gains. Teaching agents to disambiguate hidden state is essential for effective supervised fine-tuning.
             </p>
         </div>
     </div>
@@ -193,9 +202,9 @@
         for (let i = 0; i < 4; i++) {
             const btn = document.getElementById(`example-btn-${i}`);
             if (i === index) {
-                btn.className = "px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold transition-all";
+                btn.className = "px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold transition-all";
             } else {
-                btn.className = "px-3 py-1 rounded-full text-gray-500 text-xs font-bold transition-all";
+                btn.className = "px-3 py-1 rounded-full text-gray-500 text-[10px] font-bold transition-all";
             }
         }
         
@@ -232,9 +241,9 @@
             
             asciiLayer.style.opacity = '0';
             // Red button for Visual Input
-            btnVisual.className = "px-4 py-1 rounded-full bg-red-500 text-white text-xs font-bold transition-all cursor-pointer hover:bg-red-600";
+            btnVisual.className = "px-4 py-1 rounded-full bg-red-500 text-white text-[10px] font-bold transition-all cursor-pointer hover:bg-red-600";
             btnVisual.style.boxShadow = "0 0 8px rgba(239, 68, 68, 0.3), 0 0 15px rgba(239, 68, 68, 0.2)";
-            btnText.className = "px-4 py-1 rounded-full text-gray-500 text-xs font-bold transition-all cursor-pointer hover:bg-gray-100";
+            btnText.className = "px-4 py-1 rounded-full text-gray-500 text-[10px] font-bold transition-all cursor-pointer hover:bg-gray-100";
             btnText.style.boxShadow = "none";
             // Red glowing border for Visual Input (thin border, glow only)
             displayContainer.className = "bg-white p-2 rounded-2xl border border-red-500 relative overflow-hidden group transition-all duration-500";
@@ -243,10 +252,10 @@
             // Show ASCII
             imgLayer.style.opacity = '0';
             asciiLayer.style.opacity = '1';
-            btnVisual.className = "px-4 py-1 rounded-full text-gray-500 text-xs font-bold transition-all cursor-pointer hover:bg-gray-100";
+            btnVisual.className = "px-4 py-1 rounded-full text-gray-500 text-[10px] font-bold transition-all cursor-pointer hover:bg-gray-100";
             btnVisual.style.boxShadow = "none";
             // Green button for ASCII Input
-            btnText.className = "px-4 py-1 rounded-full bg-green-500 text-white text-xs font-bold transition-all cursor-pointer hover:bg-green-600";
+            btnText.className = "px-4 py-1 rounded-full bg-green-500 text-white text-[10px] font-bold transition-all cursor-pointer hover:bg-green-600";
             btnText.style.boxShadow = "0 0 8px rgba(34, 197, 94, 0.3), 0 0 15px rgba(34, 197, 94, 0.2)";
             // Green glowing border for ASCII Input (thin border, glow only)
             displayContainer.className = "bg-white p-2 rounded-2xl border border-green-500 relative overflow-hidden group transition-all duration-500";
@@ -254,13 +263,13 @@
             
             // Handle two-column display for Patch Reassembly
             if (example.asciiPart2) {
-                // Two columns side by side
-                asciiContent.className = "text-green-400 text-[10px] leading-[12px] font-mono flex gap-8 items-start";
-                asciiContent.innerHTML = `<pre class="text-green-400 text-[10px] leading-[12px] font-mono whitespace-pre-wrap flex-shrink-0">${example.ascii}</pre><pre class="text-green-400 text-[10px] leading-[12px] font-mono whitespace-pre-wrap flex-shrink-0">${example.asciiPart2}</pre>`;
+                // Two columns side by side - much smaller font for Patch Reassembly
+                asciiContent.className = "text-green-400 text-[8px] leading-tight font-mono flex gap-8 items-start";
+                asciiContent.innerHTML = `<pre class="text-green-400 text-[8px] leading-tight font-mono whitespace-pre-wrap flex-shrink-0">${example.ascii}</pre><pre class="text-green-400 text-[8px] leading-tight font-mono whitespace-pre-wrap flex-shrink-0">${example.asciiPart2}</pre>`;
             } else {
                 // Single column for other examples
-                asciiContent.className = "text-green-400 text-[10px] leading-[12px] font-mono whitespace-pre-wrap";
-                asciiContent.innerHTML = `<pre class="text-green-400 text-[10px] leading-[12px] font-mono whitespace-pre-wrap">${example.ascii}</pre>`;
+                asciiContent.className = "text-green-400 text-sm leading-relaxed font-mono whitespace-pre-wrap";
+                asciiContent.innerHTML = `<pre class="text-green-400 text-sm leading-relaxed font-mono whitespace-pre-wrap">${example.ascii}</pre>`;
             }
         }
     }

@@ -24,8 +24,8 @@
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --page-max-width: 1200px;
   --page-max-width-wide: 1400px;
-  --page-padding-desktop: 32px;
-  --page-padding-tablet: 24px;
+  --page-padding-desktop: 20px;
+  --page-padding-tablet: 20px;
   --page-padding-mobile: 18px;
 }
 
@@ -248,13 +248,14 @@ blockquote, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, iframe, le
 .apple-hero {
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
   flex-direction: column;
   background-color: #f5f5f7;
   /* Prevent flex from stretching content vertically */
   align-content: flex-start;
   justify-content: flex-start;
+  padding-bottom: 0;
 }
 
 /* Full-width Title Container */
@@ -262,7 +263,7 @@ blockquote, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, iframe, le
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
-  padding: 60px var(--page-padding-desktop) 40px;
+  padding: 40px var(--page-padding-desktop) 30px;
   text-align: left;
   /* Prevent flex layout from stretching the container */
   flex-shrink: 0;
@@ -290,7 +291,7 @@ blockquote, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, iframe, le
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
-  flex: 1;
+  flex: 0 0 auto;
   align-items: flex-start; /* Align to top instead of stretching */
   align-content: flex-start; /* Compact vertical alignment */
 }
@@ -302,7 +303,7 @@ blockquote, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, iframe, le
   display: flex;
   align-items: flex-start; /* Align to top to match image */
   justify-content: flex-start;
-  padding: 50px var(--page-padding-desktop);
+  padding: 40px var(--page-padding-desktop) 20px;
   background-color: #f5f5f7;
 }
 
@@ -326,7 +327,7 @@ blockquote, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, iframe, le
   display: flex;
   align-items: flex-start; /* Align to top to match authors */
   justify-content: center;
-  padding: 50px var(--page-padding-desktop);
+  padding: 40px var(--page-padding-desktop) 20px;
   background-color: #f5f5f7;
   position: relative;
   overflow: hidden;
@@ -346,7 +347,7 @@ blockquote, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, iframe, le
 .apple-teaser-image {
   width: 100%;
   height: auto;
-  max-height: 85vh;
+  max-height: 95vh;
   max-width: 100%;
   object-fit: contain;
   border-radius: 0;
@@ -1049,7 +1050,7 @@ section.hero.is-light .title.is-3::after {
   }
   
   .apple-teaser-image {
-    max-height: 50vh !important;
+    max-height: 60vh !important;
     width: 100% !important;
   }
   
@@ -1290,7 +1291,7 @@ section.hero.is-light .title.is-3::after {
   }
   
   .apple-teaser-image {
-    max-height: 40vh !important;
+    max-height: 50vh !important;
     width: 100% !important;
   }
   
@@ -2948,7 +2949,7 @@ code {
   }
   
   .apple-teaser-image {
-    max-height: 70vh;
+    max-height: 85vh;
   }
   
   .authors-block-module {
@@ -3088,7 +3089,7 @@ code {
   }
   
   .apple-teaser-image {
-    max-height: 60vh;
+    max-height: 75vh;
   }
   
   .more-works-container {
@@ -3215,7 +3216,7 @@ code {
   }
   
   .apple-teaser-image {
-    max-height: 50vh;
+    max-height: 60vh;
   }
   
   .more-works-container {

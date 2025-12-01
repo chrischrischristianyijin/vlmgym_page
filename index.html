@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
   
   <!-- Primary Meta Tags -->
   <meta name="title" content="VisGym: Diverse, Customizable, Scalable Environments for Multimodal Agents - Zirui Wang, Junyi Zhang, Jiaxin Ge, Long Lian, Letian Fu, Lisa Dunlap, Ken Goldberg, Xudong Wang, Ion Stoica, David M. Chan, Sewon Min, Joseph E. Gonzalez">
@@ -55,8 +55,6 @@
   <!-- Additional SEO -->
   <meta name="theme-color" content="#2563eb">
   <meta name="msapplication-TileColor" content="#2563eb">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   
   <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,9 +67,8 @@
   <!-- TODO: Replace with your paper title and authors -->
   <title>PAPER_TITLE - AUTHOR_NAMES | Academic Research</title>
   
-  <!-- Favicon and App Icons -->
+  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
   
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -256,7 +253,7 @@
             </p>
           </div>
 
-          <!-- Action Buttons -->
+          <!-- Action Buttons (Desktop: shown here, Mobile: hidden and shown in mobile container) -->
           <div class="publication-links apple-links">
             <span class="link-block">
               <a href="static/pdfs/visgym.pdf" target="_blank"
@@ -293,10 +290,49 @@
         </div>
       </div>
 
-      <!-- Right Panel: Visual Window -->
+      <!-- Right Panel: Visual Window (Mobile: shown after abstract, before buttons) -->
       <div class="hero-right-panel">
         <div class="apple-image-container">
           <img src="static/images/teaser.png" alt="VisGym Teaser" class="apple-teaser-image">
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile: Buttons container (shown after teaser image) -->
+    <div class="hero-buttons-mobile-container" style="display: none;">
+      <div class="hero-content-wrapper" style="padding: 0 16px 20px;">
+        <div class="publication-links apple-links">
+          <span class="link-block">
+            <a href="static/pdfs/visgym.pdf" target="_blank"
+              class="external-link button is-normal is-rounded is-dark apple-button paper-button">
+              <span class="icon">
+                <i class="fas fa-file-pdf"></i>
+              </span>
+             <span>Paper</span>
+            </a>
+        </span>
+
+        <span class="link-block">
+        <a href="#" onclick="return false;"
+        class="external-link button is-normal is-rounded is-dark apple-button coming-soon-button" title="Coming Soon - 还没更新">
+        <span class="icon">
+          <i class="fab fa-github"></i>
+        </span>
+        <span>Code</span>
+        <span class="coming-soon-text" style="font-size: 0.7rem; opacity: 0.7; margin-left: 0.25rem;">(Coming Soon)</span>
+      </a>
+    </span>
+
+    <span class="link-block">
+      <a href="#" onclick="return false;"
+      class="external-link button is-normal is-rounded is-dark apple-button coming-soon-button" title="Coming Soon - 还没更新">
+      <span class="icon">
+        <i class="ai ai-arxiv"></i>
+      </span>
+      <span>arXiv</span>
+      <span class="coming-soon-text" style="font-size: 0.7rem; opacity: 0.7; margin-left: 0.25rem;">(Coming Soon)</span>
+    </a>
+  </span>
         </div>
       </div>
     </div>
@@ -307,9 +343,9 @@
 <section class="section hero is-light" style="padding: 2rem 0;">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <div class="column is-four-fifths" style="padding: 0;">
         <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
+        <div class="content has-text-justified" style="margin-top: 0.5rem;">
           <p>
             Modern Vision–Language Models (VLMs) remain poorly characterized in multi-step visual interactions, particularly in how they integrate perception, memory, and action over long horizons. We introduce <span class="highlight-contribution">VisGym</span>, a comprehensive gymnasium of <span class="highlight-contribution">17 diverse environments</span> designed to <span class="highlight-contribution">systematically evaluate and train VLMs</span> on visually interactive tasks. The suite spans multiple domains—including symbolic puzzles, real-image understanding, navigation, and manipulation—and provides flexible controls over difficulty, input representation, planning horizon, and feedback mechanisms. We also provide multi-step solvers that generate structured demonstrations, enabling supervised finetuning approaches. Our comprehensive evaluations reveal that all frontier models struggle significantly in interactive settings, achieving low success rates in both easy (<span class="stat-easy">26.8%</span>) and hard (<span class="stat-hard">12.6%</span>) configurations. Through detailed experiments, we identify several critical limitations: models <span class="highlight-negative">fail to effectively leverage long context</span>, performing worse with unbounded history than with truncated windows. Additionally, we find that several text-based symbolic tasks become substantially harder once rendered visually, highlighting the unique challenges of visual reasoning. However, we demonstrate that explicit goal observations, textual feedback, and exploratory demonstrations in partially observable or unknown-dynamics settings yield <span class="highlight-negative">consistent improvements through supervised finetuning</span>, revealing concrete failure modes and actionable pathways for advancing multi-step visual decision-making. All code, data, and models will be publicly released.
           </p>

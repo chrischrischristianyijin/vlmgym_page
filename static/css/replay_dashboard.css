@@ -1,19 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
-  /* 8-bit Laboratory Color Palette */
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F9F9F9;
-  --bg-tertiary: #F0F0F0;
-  --black: #000000;
-  --yellow-pacman: #FFD700;
-  --blue-arcade: #2B6CB0;
-  --red-pixel: #E53E3E;
-  --text-primary: #000000;
-  --text-secondary: #333333;
-  --border-black: #000000;
-  --shadow-hard: 6px 6px 0px #000000;
-  --shadow-hard-hover: 8px 8px 0px #000000;
+  /* 8-bit Laboratory Color Palette - Dashboard specific variables with prefix to avoid conflicts with index.css */
+  /* All variables use --dashboard- prefix to prevent conflicts with index.css variables like --text-primary, --text-secondary */
+  --dashboard-bg-primary: #FFFFFF;
+  --dashboard-bg-secondary: #F9F9F9;
+  --dashboard-bg-tertiary: #F0F0F0;
+  --dashboard-black: #000000;
+  --dashboard-yellow-pacman: #FFD700;
+  --dashboard-blue-arcade: #2B6CB0;
+  --dashboard-red-pixel: #E53E3E;
+  --dashboard-text-primary: #000000;
+  --dashboard-text-secondary: #333333;
+  --dashboard-border-black: #000000;
+  --dashboard-shadow-hard: 6px 6px 0px #000000;
+  --dashboard-shadow-hard-hover: 8px 8px 0px #000000;
+  
+  /* Local aliases for internal use only - these are scoped to replay_dashboard.html iframe */
+  /* These will NOT conflict with index.css because replay_dashboard.html is in a separate iframe */
+  --bg-primary: var(--dashboard-bg-primary);
+  --bg-secondary: var(--dashboard-bg-secondary);
+  --bg-tertiary: var(--dashboard-bg-tertiary);
+  --black: var(--dashboard-black);
+  --yellow-pacman: var(--dashboard-yellow-pacman);
+  --blue-arcade: var(--dashboard-blue-arcade);
+  --red-pixel: var(--dashboard-red-pixel);
+  --text-primary: var(--dashboard-text-primary);
+  --text-secondary: var(--dashboard-text-secondary);
+  --border-black: var(--dashboard-border-black);
+  --shadow-hard: var(--dashboard-shadow-hard);
+  --shadow-hard-hover: var(--dashboard-shadow-hard-hover);
 }
 
 * {
@@ -22,18 +38,30 @@
   box-sizing: border-box;
 }
 
+/* Dashboard-specific html styles - scoped to avoid conflicts with index.css */
+html {
+  font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  scroll-behavior: auto !important; /* Override index.css smooth scrolling if needed */
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Dashboard-specific body styles - scoped to avoid conflicts with index.css */
 body {
-  font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--bg-primary);
+  font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  background-color: var(--dashboard-bg-primary) !important;
   background-image: 
     linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-  background-size: 20px 20px;
-  color: var(--text-primary);
-  height: 100vh;
-  overflow: auto; /* Changed from hidden to auto to allow scrolling */
-  display: flex;
-  flex-direction: column;
+    linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px) !important;
+  background-size: 20px 20px !important;
+  color: var(--dashboard-text-primary) !important;
+  height: 100vh !important;
+  overflow: auto !important; /* Changed from hidden to auto to allow scrolling */
+  display: flex !important;
+  flex-direction: column !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.6 !important;
 }
 
 /* Mission Data Container - Between Navigation and Dashboard */
@@ -1400,6 +1428,30 @@ body {
     width: 44px;
     height: 44px;
   }
+  
+  /* Touch-friendly improvements */
+  .environment-card {
+    min-height: 44px; /* Minimum touch target */
+  }
+  
+  .player-nav-button,
+  .player-play-button {
+    min-width: 44px;
+    min-height: 44px;
+    touch-action: manipulation; /* Disable double-tap zoom */
+  }
+  
+  /* Improve text readability */
+  .monitor-content {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* Prevent horizontal scroll */
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -1498,5 +1550,108 @@ body {
   
   .player-button-icon {
     font-size: 12px;
+  }
+  
+  /* Small mobile optimizations */
+  .environment-card {
+    width: 100px !important;
+  }
+  
+  .card-image-wrapper {
+    width: 100px !important;
+    height: 60px !important;
+  }
+  
+  .card-label {
+    font-size: 8px !important;
+    padding: 2px 4px !important;
+  }
+  
+  .mission-data-container {
+    padding: 8px;
+    gap: 8px;
+  }
+  
+  .mission-data-container .mission-data-card,
+  .mission-data-container .goal-card {
+    min-height: 120px;
+  }
+  
+  .mission-data-container .mission-header {
+    font-size: 7px;
+    padding: 4px 8px;
+  }
+  
+  .mission-data-container .goal-label {
+    font-size: 7px;
+    padding: 4px 8px;
+  }
+  
+  .mission-data-container .goal-content {
+    font-size: 8px;
+    padding: 8px;
+  }
+  
+  .left-panel,
+  .right-panel {
+    padding: 8px;
+  }
+  
+  .image-container {
+    min-height: 180px;
+    border-width: 3px;
+  }
+  
+  .step-indicator {
+    font-size: 5px;
+  }
+  
+  .monitor-frame {
+    padding: 6px;
+  }
+  
+  .monitor-label {
+    font-size: 5px;
+  }
+  
+  .monitor-title {
+    font-size: 6px;
+    padding: 4px;
+  }
+  
+  .monitor-content {
+    font-size: 8px;
+    padding: 4px;
+  }
+  
+  .feedback-text,
+  .action-terminal {
+    font-size: 7px;
+  }
+  
+  .player-nav-button {
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+  }
+  
+  .player-play-button {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .player-button-icon {
+    font-size: 10px;
+  }
+  
+  /* Touch optimizations */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  button,
+  .environment-card,
+  .player-nav-button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
   }
 }

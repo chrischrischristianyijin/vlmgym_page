@@ -5,6 +5,7 @@
   --secondary-color: #64748b;
   --accent-color: #0ea5e9;
   --text-primary: #1e293b;
+  --text-body: #374151;
   --text-secondary: #64748b;
   --text-light: #94a3b8;
   --background-primary: #ffffff;
@@ -216,8 +217,8 @@ blockquote, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, iframe, le
 .apple-abstract p {
   font-family: 'Karla', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: clamp(0.98rem, 1vw + 0.45rem, 1.15rem) !important; /* Slightly smaller */
-  line-height: 1.55; /* Tighter line spacing */
-  color: #4b5563; /* Darker gray for readability */
+  line-height: 1.65; /* Improved readability */
+  color: var(--text-body); /* Unified body text color */
   font-weight: 400; /* Regular weight */
   margin: 0;
   letter-spacing: normal;
@@ -940,19 +941,19 @@ section.hero.is-light .title.is-3::after {
   }
   
   .hero-left-panel {
-    padding: 20px 16px 12px !important;
+    padding: 32px var(--page-padding-mobile) 16px !important;
     order: 1;
     width: 100% !important;
   }
-  
+
   /* Mobile: Hide buttons inside left panel */
   .hero-left-panel .apple-links {
     display: none !important;
   }
-  
+
   /* Mobile: Show teaser image after abstract, before buttons */
   .hero-right-panel {
-    padding: 0 16px 12px !important;
+    padding: 0 var(--page-padding-mobile) 16px !important;
     order: 2;
     width: 100% !important;
   }
@@ -1232,23 +1233,23 @@ section.hero.is-light .title.is-3::after {
 @media screen and (max-width: 480px) {
   /* Hero section small mobile */
   .apple-title-container {
-    padding: 16px 12px 12px !important;
+    padding: 24px 12px 12px !important;
   }
-  
+
   .apple-title .title-main {
     font-size: clamp(1.3rem, 7vw + 0.4rem, 1.8rem) !important;
   }
-  
+
   .apple-title .title-main img {
     height: 1em !important;
   }
-  
+
   .apple-title .title-subtitle {
     font-size: clamp(0.85rem, 3vw + 0.4rem, 1rem) !important;
   }
-  
+
   .hero-left-panel {
-    padding: 16px 12px !important;
+    padding: 24px 12px !important;
     width: 100% !important;
   }
   
@@ -3048,10 +3049,10 @@ code {
   }
   
   /* Authors use clamp() so responsive automatically - no override needed */
-  
+
   .authors-block-module {
     padding-left: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
   }
   
   .authors-block-module::before {
@@ -3171,7 +3172,7 @@ code {
   
   .authors-block-module {
     padding-left: 16px;
-    margin-bottom: 20px; /* Reduced: 32px→20px */
+    margin-bottom: 16px;
   }
   
   .authors-block-module::before {
@@ -3379,17 +3380,18 @@ section.hero.is-light .container.is-max-desktop.page-shell {
 
 .apple-abstract p {
   font-size: 1.05rem !important;
-  line-height: 1.55 !important;
+  line-height: 1.65 !important;
   letter-spacing: normal !important;
-  color: #4b5563 !important;
+  color: var(--text-body) !important;
 }
 
 .content.has-text-justified {
   font-size: 1.05rem !important;
-  line-height: 1.55 !important;
+  line-height: 1.7 !important;
   text-align: left !important;
   letter-spacing: normal !important;
   word-spacing: normal !important;
+  color: var(--text-body) !important;
 }
 
 .content.has-text-justified p {

@@ -1107,7 +1107,7 @@ section.hero.is-light .title.is-3::after {
   iframe[src*="failure_analysis"],
   .embed-frame {
     width: 100% !important;
-    min-height: 800px !important; /* Ensure enough height for content on mobile */
+    min-height: 550px !important; /* Ensure enough height for content on mobile */
     max-height: none !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -1327,7 +1327,7 @@ section.hero.is-light .title.is-3::after {
   iframe[src*="failure_analysis"],
   .embed-frame {
     width: 100% !important;
-    min-height: 700px !important; /* Ensure enough height for content on small mobile */
+    min-height: 480px !important; /* Ensure enough height for content on small mobile */
     max-height: none !important;
     margin: 0 !important;
     padding: 0 !important;

@@ -111,6 +111,26 @@ body {
   background-color: rgba(0, 26, 51, 0.65) !important; /* Slightly lighter when pressed */
 }
 
+/* Paper Button - Dark Navy Blue */
+.paper-button {
+  background: #1a1a2e !important; /* Dark navy blue */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.paper-button:hover {
+  background: #16213e !important; /* Slightly lighter on hover */
+  box-shadow: 
+    0 8px 24px rgba(26, 26, 46, 0.4),
+    0 2px 6px rgba(26, 26, 46, 0.3) !important;
+}
+
+.paper-button:active {
+  background: #0f1419 !important; /* Darker when pressed */
+  box-shadow: 
+    0 2px 8px rgba(26, 26, 46, 0.3) !important;
+}
+
 .apple-links {
   display: flex;
   flex-wrap: wrap;

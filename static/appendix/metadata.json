@@ -1,0 +1,53 @@
+{
+  "ToyMaze3DEnv-v0": {
+    "steps": 20
+  },
+  "sliding_block__SlidingBlockEnv-v0": {
+    "steps": 13
+  },
+  "video_unshuffle__VideoUnshuffleEnv-v0": {
+    "steps": 3
+  },
+  "FetchReachDiscrete-v4": {
+    "steps": 11
+  },
+  "counting__LVISCountingEnv-v0": {
+    "steps": 7
+  },
+  "mental_rotation_3d__mental_rotation-3d": {
+    "steps": 2
+  },
+  "mental_rotation__mental_rotation-v0": {
+    "steps": 2
+  },
+  "Jigsaw-v0": {
+    "steps": 8
+  },
+  "ToyMaze2DEnv-v0": {
+    "steps": 17
+  },
+  "colorization__ColorizationEnv-v2": {
+    "steps": 6
+  },
+  "match_equation__MatchEquation-v0": {
+    "steps": 5
+  },
+  "FetchPickAndPlaceDiscrete-v4": {
+    "steps": 27
+  },
+  "match_move__MatchRotation-v0": {
+    "steps": 4
+  },
+  "mental_rotation-3d_objaverse-v0": {
+    "steps": 2
+  },
+  "patch_reassembly__PatchReassemblyEnv-v0": {
+    "steps": 7
+  },
+  "ref_dot__RefCOCOPlusDotEnv-v0": {
+    "steps": 4
+  },
+  "zoom_in__ZoomInEnv-v0": {
+    "steps": 4
+  }
+}
